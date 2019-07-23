@@ -1,8 +1,8 @@
 const getAll = () => {
     return Promise.resolve([
-        {id: `${Date.now()}-1`, name: 'Item 1'},
-        {id: `${Date.now()}-2`, name: 'Item 2'},
-        {id: `${Date.now()}-3`, name: 'Item 3'}
+        {id: `${Date.now()}-1`, name: 'Entity 1'},
+        {id: `${Date.now()}-2`, name: 'Entity 2'},
+        {id: `${Date.now()}-3`, name: 'Entity 3'}
     ])
 }
 

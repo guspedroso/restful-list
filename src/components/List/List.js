@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
+import Item from '../Item/Item';
 import './List.css';
 
 class List extends Component {
@@ -69,12 +70,12 @@ class List extends Component {
     }
 
     render() {
-        const { list, createAction } = this.props;
+        const { list, createAction, updateAction, removeAction } = this.props;
         const { result } = list;
         const colStyle = { span: 6, offset: 3 };
 
         return (
-            <div className="list">
+            <Fragment>
                 {this.modal()}
                 <Container>
                     <Row>
@@ -85,18 +86,22 @@ class List extends Component {
                     { !!result && result.map(item =>
                         <Row key={item.id}>
                             <Col className="list-row" md={colStyle}>
-                                {item.name}
+                                <Item
+                                    item={item}
+                                    updateAction={updateAction}
+                                    removeAction={removeAction}
+                                />
                             </Col>
                         </Row>
                     )}
                     { !!createAction &&
                     <Row>
                         <Col md={colStyle}>
-                            <Button className="pull-right" variant="primary" onClick={this.toggleCreate}>Add</Button>
+                            <Button className="pull-right top" variant="primary" onClick={this.toggleCreate}>Add</Button>
                         </Col>
                     </Row> }
                 </Container>
-            </div>
+            </Fragment>
         );
     }
 }
