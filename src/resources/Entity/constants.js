@@ -1,7 +1,10 @@
 export const entityInfo = {
     apiType: 'entity',
     title: 'Entity',
-    inputTypes: []
+    listTitle: 'Entities',
+    inputTypes: [
+        {label: 'Name', type: 'text', placeholder: 'Enter name', name: 'name'}
+    ]
 };
 
 const constantsType = entityInfo.apiType.toUpperCase();

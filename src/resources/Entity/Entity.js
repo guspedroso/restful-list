@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from './actions';
 import List from '../../components/List/List';
+import { entityInfo } from './constants';
 
 class Entity extends Component {
     componentDidMount() {
@@ -14,6 +15,7 @@ class Entity extends Component {
 
         return (
             <List
+                entityInfo={entityInfo}
                 list={entities}
                 createAction={create}
                 updateAction={update}

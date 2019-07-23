@@ -61,19 +61,27 @@ class Item extends Component {
 
     modal = () => {
         const { updateView, removeView } = this.state;
-        const { item, removeAction } = this.props;
-        const { name } = item;
+        const { entityInfo, item, removeAction } = this.props;
+        const { inputTypes, title } = entityInfo;
 
         return (
             <Modal show={updateView} onHide={this.toggleUpdate}>
                 <Modal.Header closeButton>
-                  <Modal.Title>Update Entity</Modal.Title>
+                    <Modal.Title>Update {title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter name" name="name" onChange={this.updatePayload} defaultValue={name}/>
-                    </Form.Group>
+                    { !!inputTypes && inputTypes.map(inputType =>
+                        <Form.Group key={`input-${inputType.name}`}>
+                            <Form.Label>{inputType.label}</Form.Label>
+                            <Form.Control 
+                                type={inputType.type}
+                                placeholder={inputType.placeholder}
+                                name={inputType.name}
+                                onChange={this.updatePayload}
+                                defaultValue={item[inputType.name]}
+                            />
+                        </Form.Group>
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     { removeView ?
@@ -119,6 +127,7 @@ class Item extends Component {
 }
 
 Item.propTypes = {
+    entityInfo: PropTypes.object.isRequired,
     item: PropTypes.object.isRequired,
     updateAction: PropTypes.func,
     removeAction: PropTypes.func
