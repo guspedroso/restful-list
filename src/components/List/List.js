@@ -52,7 +52,7 @@ class List extends Component {
                   <Modal.Title>Create Entity</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group>
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter name" name="name" onChange={this.updatePayload}/>
                     </Form.Group>

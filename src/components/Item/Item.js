@@ -8,7 +8,8 @@ class Item extends Component {
         super(props);
         this.state = {
             payload: {},
-            updateView: false
+            updateView: false,
+            removeView: false
         };
     }
 
@@ -32,6 +33,11 @@ class Item extends Component {
         });
     }
 
+    toggleRemove = () => {
+        const { removeView } = this.state;
+        this.setState({removeView: !removeView});
+    }
+
     update = () => {
         const { payload } = this.state;
         const { item, updateAction } = this.props;
@@ -43,9 +49,19 @@ class Item extends Component {
         }
     }
 
+    remove = () => {
+        const { item, removeAction } = this.props;
+        const { id } = item;
+
+        if (id) {
+            removeAction(id);
+            this.toggleUpdate();
+        }
+    }
+
     modal = () => {
-        const { updateView } = this.state;
-        const { item } = this.props;
+        const { updateView, removeView } = this.state;
+        const { item, removeAction } = this.props;
         const { name } = item;
 
         return (
@@ -54,18 +70,34 @@ class Item extends Component {
                   <Modal.Title>Update Entity</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group>
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter name" name="name" onChange={this.updatePayload} defaultValue={name}/>
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={this.toggleUpdate}>
-                    Cancel
-                  </Button>
-                  <Button variant="primary" onClick={this.update}>
-                    Update
-                  </Button>
+                    { removeView ?
+                    <Fragment>
+                        <span className="padding-right">Are you sure you want to remove?</span>
+                        <Button variant="secondary" onClick={this.toggleRemove}>
+                            No
+                        </Button>
+                        <Button variant="primary" onClick={this.remove}>
+                            Yes
+                        </Button>
+                    </Fragment> :
+                    <Fragment>
+                        { !!removeAction &&
+                        <Button variant="danger" onClick={this.toggleRemove}>
+                            Remove
+                        </Button> }
+                        <Button variant="secondary" onClick={this.toggleUpdate}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={this.update}>
+                            Update
+                        </Button>
+                    </Fragment> }
                 </Modal.Footer>
             </Modal>
         );
