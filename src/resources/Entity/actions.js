@@ -16,9 +16,9 @@ const getAll = (options) => {
 };
 
 const create = (payload) => {
-    const request = (payload) => { return { type: constants.GETALL_REQUEST, payload } };
-    const success = (result) => { return { type: constants.GETALL_SUCCESS, result } };
-    const failure = (error) => { return { type: constants.GETALL_FAILURE, error } };
+    const request = (payload) => { return { type: constants.CREATE_REQUEST, payload } };
+    const success = (result) => { return { type: constants.CREATE_SUCCESS, result } };
+    const failure = (error) => { return { type: constants.CREATE_FAILURE, error } };
 
     return dispatch => {
         dispatch(request(payload));
@@ -30,9 +30,9 @@ const create = (payload) => {
 };
 
 const update = (id, payload) => {
-    const request = (id, payload) => { return { type: constants.GETALL_REQUEST, id, payload } };
-    const success = (id, result) => { return { type: constants.GETALL_SUCCESS, id, result } };
-    const failure = (id, error) => { return { type: constants.GETALL_FAILURE, id, error } };
+    const request = (id, payload) => { return { type: constants.UPDATE_REQUEST, id, payload } };
+    const success = (id, result) => { return { type: constants.UPDATE_SUCCESS, id, result } };
+    const failure = (id, error) => { return { type: constants.UPDATE_FAILURE, id, error } };
 
     return dispatch => {
         dispatch(request(id, payload));
@@ -44,9 +44,9 @@ const update = (id, payload) => {
 };
 
 const remove = (id) => {
-    const request = (id) => { return { type: constants.GETALL_REQUEST, id } };
-    const success = (id, result) => { return { type: constants.GETALL_SUCCESS, id, result } };
-    const failure = (id, error) => { return { type: constants.GETALL_FAILURE, id, error } };
+    const request = (id) => { return { type: constants.REMOVE_REQUEST, id } };
+    const success = (id, result) => { return { type: constants.REMOVE_SUCCESS, id, result } };
+    const failure = (id, error) => { return { type: constants.REMOVE_FAILURE, id, error } };
 
     return dispatch => {
         dispatch(request(id));

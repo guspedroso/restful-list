@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from './actions';
+import List from '../../components/List/List';
 
 class Entity extends Component {
     componentDidMount() {
@@ -9,17 +10,15 @@ class Entity extends Component {
     }
 
     render() {
-        const { entities } = this.props;
-        const { result } = entities;
+        const { entities, create, update, remove } = this.props;
 
         return (
-            <Fragment>
-                { !!result && result.map(item =>
-                    <div key={item.id}>
-                        {item.name}
-                    </div>
-                )}
-            </Fragment>
+            <List
+                list={entities}
+                createAction={create}
+                updateAction={update}
+                removeAction={remove}
+            />
         );
     }
 }
