@@ -3,7 +3,8 @@ export const entityInfo = {
     title: 'Entity',
     listTitle: 'Entities',
     inputTypes: [
-        {label: 'Name', type: 'text', placeholder: 'Enter name', name: 'name'}
+        {label: 'Name', type: 'text', placeholder: 'Enter name', name: 'name'},
+        // {label: 'Description', type: 'text', placeholder: 'Enter description', name: 'description'}
     ]
 };
 

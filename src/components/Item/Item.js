@@ -112,13 +112,18 @@ class Item extends Component {
     }
 
     render() {
-        const { item, updateAction } = this.props;
+        const { item, updateAction, entityInfo } = this.props;
+        const { inputTypes } = entityInfo;
         const { name } = item;
 
         return (
             <Fragment>
                 {this.modal()}
-                {name}
+                { !!inputTypes && inputTypes.map((inputType, index) =>
+                    <span className="padding-right" key={inputType.name}>
+                        {item[inputType.name]}
+                    </span>
+                )}
                 { !!updateAction &&
                 <Button className="pull-right" variant="primary" onClick={this.toggleUpdate}>Edit</Button> }
             </Fragment>
