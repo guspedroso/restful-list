@@ -10,8 +10,7 @@ class Item extends Component {
         super(props);
         this.state = {
             payload: {},
-            updateView: props.updateView,
-            removeView: false
+            updateView: props.updateView
         };
     }
 
@@ -33,11 +32,6 @@ class Item extends Component {
             updateView: !updateView,
             payload: {}
         });
-    }
-
-    toggleRemove = () => {
-        const { removeView } = this.state;
-        this.setState({removeView: !removeView});
     }
 
     update = () => {
@@ -62,7 +56,7 @@ class Item extends Component {
     }
 
     modal = () => {
-        const { updateView, removeView } = this.state;
+        const { updateView } = this.state;
         const { entityInfo, item, removeAction, readOnly, updateAction } = this.props;
         const { title } = entityInfo;
         const disabled = !item.id || readOnly;
@@ -116,6 +110,7 @@ class Item extends Component {
                         removeAction={removeAction && this.remove}
                         toggle={this.toggleUpdate}
                         open={updateView}
+                        toggleOnly={useModal}
                     />
                 </span>
             </Fragment>

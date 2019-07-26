@@ -16,13 +16,13 @@ class ActionBar extends Component {
     }
 
     render() {
-        const { hide, open, disabled, createAction, updateAction, removeAction, toggle } = this.props;
+        const { hide, open, disabled, createAction, updateAction, removeAction, toggle, toggleOnly } = this.props;
         const { removeView } = this.state;
 
         return (
             <Fragment>
                 { hide ? null :
-                !open ?
+                !open || toggleOnly ?
                 <Button variant="primary" onClick={toggle} disabled={disabled}>
                     Edit
                 </Button> :
@@ -64,13 +64,15 @@ ActionBar.propTypes = {
     updateAction: PropTypes.func,
     removeAction: PropTypes.func,
     open: PropTypes.bool,
-    hide: PropTypes.bool
+    hide: PropTypes.bool,
+    toggleOnly: PropTypes.bool
 };
 
 ActionBar.defaultProps = {
     disabled: false,
     open: false,
-    hide: false
+    hide: false,
+    toggleOnly: false
 };
 
 export default ActionBar;
