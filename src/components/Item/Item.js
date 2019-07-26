@@ -114,6 +114,7 @@ class Item extends Component {
     render() {
         const { item, updateAction, entityInfo, readOnly } = this.props;
         const { inputTypes } = entityInfo;
+        const { updating, removing } = item;
 
         return (
             <Fragment>
@@ -128,7 +129,14 @@ class Item extends Component {
                     </span>
                 )}
                 { item.id && !readOnly && !!updateAction &&
-                <Button className="pull-right" variant="primary" onClick={this.toggleUpdate}>Edit</Button> }
+                <Button 
+                    className="pull-right"
+                    variant="primary"
+                    onClick={this.toggleUpdate}
+                    disabled={updating || removing}
+                >
+                    Edit
+                </Button> }
             </Fragment>
         );
     }
