@@ -79,7 +79,8 @@ class List extends Component {
     }
 
     render() {
-        const { entityInfo, list, createAction, updateAction, removeAction } = this.props;
+        const { entityInfo, list, createAction, updateAction, removeAction,
+                requesting, creating, error } = this.props;
         const { listTitle } = entityInfo;
         const colStyle = { span: 6, offset: 3 };
 
@@ -92,7 +93,19 @@ class List extends Component {
                             <h2>{listTitle}</h2>
                         </Col>
                     </Row>
-                    { !!list && list.map(item =>
+                    { !!error ?
+                    <Row>
+                        <Col className="list-row error" md={colStyle}>
+                            {error}
+                        </Col>
+                    </Row> :
+                    requesting ?
+                    <Row>
+                        <Col className="list-row" md={colStyle}>
+                            Loading...
+                        </Col>
+                    </Row> :
+                    !!list && list.map(item =>
                         <Row key={item.id}>
                             <Col className="list-row" md={colStyle}>
                                 <Item
@@ -107,7 +120,14 @@ class List extends Component {
                     { !!createAction &&
                     <Row>
                         <Col md={colStyle}>
-                            <Button className="pull-right top" variant="primary" onClick={this.toggleCreate}>Add</Button>
+                            <Button 
+                                className="pull-right top" 
+                                variant="primary"
+                                onClick={this.toggleCreate}
+                                disabled={creating}
+                            >
+                                Add
+                            </Button>
                         </Col>
                     </Row> }
                 </Container>
@@ -121,11 +141,16 @@ List.propTypes = {
     list: PropTypes.array.isRequired,
     createAction: PropTypes.func,
     updateAction: PropTypes.func,
-    removeAction: PropTypes.func
+    removeAction: PropTypes.func,
+    requesting: PropTypes.bool,
+    creating: PropTypes.bool,
+    error: PropTypes.string,
 };
 
 List.defaultProps = {
-    list: []
+    list: [],
+    requesting: true,
+    creating: false
 };
 
 export default List;

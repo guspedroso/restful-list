@@ -3,7 +3,13 @@ import { config } from '../../common/config';
 import { entityInfo } from './constants';*/
 
 const getById = (id) => {
-    return Promise.resolve({id: id, name: 'Entity By Id'})
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(
+                {id: id, name: 'Entity By Id'}
+            );
+        }, 1000);
+    });
 
     // TODO: uncomment when backend is ready
     /*const requestOptions = {
@@ -17,11 +23,17 @@ const getById = (id) => {
 }
 
 const getAll = (options) => {
-    return Promise.resolve([
-        {id: `${Date.now()}-1`, name: 'Entity 1'},
-        {id: `${Date.now()}-2`, name: 'Entity 2'},
-        {id: `${Date.now()}-3`, name: 'Entity 3'}
-    ])
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(
+                [
+                    {id: `${Date.now()}-1`, name: 'Entity 1'},
+                    {id: `${Date.now()}-2`, name: 'Entity 2'},
+                    {id: `${Date.now()}-3`, name: 'Entity 3'}
+                ]
+            );
+        }, 1000);
+    });
 
     // TODO: uncomment when backend is ready
     /*const requestOptions = {
@@ -36,7 +48,13 @@ const getAll = (options) => {
 }
 
 const create = (payload) => {
-    return Promise.resolve({...payload, id: `${Date.now()}`})
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(
+                {...payload, id: `${Date.now()}`}
+            );
+        }, 1000);
+    });
 
     // TODO: uncomment when backend is ready
     /*const requestOptions = {
@@ -51,7 +69,13 @@ const create = (payload) => {
 }
 
 const update = (id, payload) => {
-    return Promise.resolve(payload)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(
+                payload
+            );
+        }, 1000);
+    });
 
     // TODO: uncomment when backend is ready
     /*const requestOptions = {
@@ -66,7 +90,13 @@ const update = (id, payload) => {
 }
 
 const remove = (id) => {
-    return Promise.resolve(true)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(
+                true
+            );
+        }, 1000);
+    });
 
     // TODO: uncomment when backend is ready
     /*const requestOptions = {
