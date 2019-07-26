@@ -1,3 +1,7 @@
+## Purpose
+
+This is a project to show a pattern that I am trying out to perform CRUD operations on some entity that I would have stored on the backend.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
