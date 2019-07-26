@@ -2,7 +2,21 @@
 import { config } from '../../common/config';
 import { entityInfo } from './constants';*/
 
-const getAll = () => {
+const getById = (id) => {
+    return Promise.resolve({id: id, name: 'Entity By Id'})
+
+    // TODO: uncomment when backend is ready
+    /*const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/${entityInfo.apiEntityType}/${id}`, requestOptions)
+        .then(handleResponse)
+        .catch(handleError);*/
+}
+
+const getAll = (options) => {
     return Promise.resolve([
         {id: `${Date.now()}-1`, name: 'Entity 1'},
         {id: `${Date.now()}-2`, name: 'Entity 2'},
@@ -15,8 +29,8 @@ const getAll = () => {
         headers: authHeader()
     };
 
-    // options can be passed in as query params, ?numRows=10&sort=name in future
-    return fetch(`${config.apiUrl}/${entityInfo.apiType}`, requestOptions)
+    // options can be passed in as query params, numRows=10&sort=name
+    return fetch(`${config.apiUrl}/${entityInfo.apiType}/?${options}`, requestOptions)
         .then(handleResponse)
         .catch(handleError);*/
 }
@@ -66,6 +80,7 @@ const remove = (id) => {
 }
 
 export const service = {
+    getById,
     getAll,
     create,
     update,

@@ -1,11 +1,11 @@
 import React from 'react';
-import Entity from '../../resources/Entity/Entity';
+import EntityList from '../../resources/Entity/EntityList';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Entity/>
+      <EntityList/>
     </div>
   );
 }

@@ -1,6 +1,20 @@
 import { constants } from './constants';
 import { service } from './service';
 
+const getById = (id) => {
+    const request = (id) => { return { type: constants.GETBYID_REQUEST, id } };
+    const success = (result) => { return { type: constants.GETBYID_SUCCESS, result } };
+    const failure = (error) => { return { type: constants.GETBYID_FAILURE, error } };
+
+    return dispatch => {
+        dispatch(request(id));
+        service.getById(id).then(
+            result => dispatch(success(result)),
+            error => dispatch(failure(error))
+        );
+    }
+};
+
 const getAll = (options) => {
     const request = (options) => { return { type: constants.GETALL_REQUEST, options } };
     const success = (result) => { return { type: constants.GETALL_SUCCESS, result } };
@@ -58,6 +72,7 @@ const remove = (id) => {
 };
 
 export const actions = {
+    getById,
     getAll,
     create,
     update,

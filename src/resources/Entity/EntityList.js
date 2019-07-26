@@ -11,12 +11,12 @@ class Entity extends Component {
     }
 
     render() {
-        const { entities, create, update, remove } = this.props;
+        const { list, create, update, remove } = this.props;
 
         return (
             <List
                 entityInfo={entityInfo}
-                list={entities}
+                list={list}
                 createAction={create}
                 updateAction={update}
                 removeAction={remove}
@@ -27,14 +27,15 @@ class Entity extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     const { entities } = state;
+    const { list } = entities;
     return {
-        entities
+        list
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAll: () => dispatch(actions.getAll()),
+        getAll: (options) => dispatch(actions.getAll(options)),
         create: (payload) => dispatch(actions.create(payload)),
         update: (id, payload) => dispatch(actions.update(id, payload)),
         remove: (id) => dispatch(actions.remove(id))

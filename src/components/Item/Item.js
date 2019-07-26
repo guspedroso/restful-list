@@ -112,19 +112,22 @@ class Item extends Component {
     }
 
     render() {
-        const { item, updateAction, entityInfo } = this.props;
+        const { item, updateAction, entityInfo, readOnly } = this.props;
         const { inputTypes } = entityInfo;
-        const { name } = item;
 
         return (
             <Fragment>
                 {this.modal()}
-                { !!inputTypes && inputTypes.map((inputType, index) =>
+                { !item.id && <div>loading...</div>}
+                { item.id && !!inputTypes && 
+                    inputTypes
+                    .filter(inputType => inputType.showInDisplayView === true)
+                    .map((inputType, index) =>
                     <span className="padding-right" key={inputType.name}>
                         {item[inputType.name]}
                     </span>
                 )}
-                { !!updateAction &&
+                { item.id && !readOnly && !!updateAction &&
                 <Button className="pull-right" variant="primary" onClick={this.toggleUpdate}>Edit</Button> }
             </Fragment>
         );
@@ -135,13 +138,13 @@ Item.propTypes = {
     entityInfo: PropTypes.object.isRequired,
     item: PropTypes.object.isRequired,
     updateAction: PropTypes.func,
-    removeAction: PropTypes.func
+    removeAction: PropTypes.func,
+    readOnly: PropTypes.bool
 };
 
 Item.defaultProps = {
-    item: {
-        result: []
-    }
+    item: {},
+    readOnly: false
 };
 
 export default Item;

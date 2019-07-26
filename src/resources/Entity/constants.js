@@ -3,14 +3,24 @@ export const entityInfo = {
     title: 'Entity',
     listTitle: 'Entities',
     inputTypes: [
-        {label: 'Name', type: 'text', placeholder: 'Enter name', name: 'name'},
-        // {label: 'Description', type: 'text', placeholder: 'Enter description', name: 'description'}
+        {
+            label: 'Name',
+            type: 'text',
+            placeholder: 'Enter name',
+            name: 'name',
+            required: true,
+            showInDisplayView: true
+        },
     ]
 };
 
 const constantsType = entityInfo.apiType.toUpperCase();
 
 export const constants = {
+    GETBYID_REQUEST: `${constantsType}_GETBYID_REQUEST`,
+    GETBYID_SUCCESS: `${constantsType}_GETBYID_SUCCESS`,
+    GETBYID_FAILURE: `${constantsType}_GETBYID_FAILURE`,
+
     GETALL_REQUEST: `${constantsType}_GETALL_REQUEST`,
     GETALL_SUCCESS: `${constantsType}_GETALL_SUCCESS`,
     GETALL_FAILURE: `${constantsType}_GETALL_FAILURE`,

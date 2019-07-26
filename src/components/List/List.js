@@ -81,7 +81,6 @@ class List extends Component {
     render() {
         const { entityInfo, list, createAction, updateAction, removeAction } = this.props;
         const { listTitle } = entityInfo;
-        const { result } = list;
         const colStyle = { span: 6, offset: 3 };
 
         return (
@@ -93,7 +92,7 @@ class List extends Component {
                             <h2>{listTitle}</h2>
                         </Col>
                     </Row>
-                    { !!result && result.map(item =>
+                    { !!list && list.map(item =>
                         <Row key={item.id}>
                             <Col className="list-row" md={colStyle}>
                                 <Item
@@ -119,16 +118,14 @@ class List extends Component {
 
 List.propTypes = {
     entityInfo: PropTypes.object.isRequired,
-    list: PropTypes.object.isRequired,
+    list: PropTypes.array.isRequired,
     createAction: PropTypes.func,
     updateAction: PropTypes.func,
     removeAction: PropTypes.func
 };
 
 List.defaultProps = {
-    list: {
-        result: []
-    }
+    list: []
 };
 
 export default List;
