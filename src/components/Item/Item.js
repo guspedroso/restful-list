@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, Form } from 'react-bootstrap';
+import Input from '../Input/Input';
+import ActionBar from '../ActionBar/ActionBar';
 import './Item.css';
 
 class Item extends Component {
@@ -8,7 +10,7 @@ class Item extends Component {
         super(props);
         this.state = {
             payload: {},
-            updateView: false,
+            updateView: props.updateView,
             removeView: false
         };
     }
@@ -61,82 +63,61 @@ class Item extends Component {
 
     modal = () => {
         const { updateView, removeView } = this.state;
-        const { entityInfo, item, removeAction } = this.props;
-        const { inputTypes, title } = entityInfo;
+        const { entityInfo, item, removeAction, readOnly, updateAction } = this.props;
+        const { title } = entityInfo;
+        const disabled = !item.id || readOnly;
 
         return (
             <Modal show={updateView} onHide={this.toggleUpdate}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update {title}</Modal.Title>
+                    <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    { !!inputTypes && inputTypes.map(inputType =>
-                        <Form.Group key={`input-${inputType.name}`}>
-                            <Form.Label>{inputType.label}</Form.Label>
-                            <Form.Control 
-                                type={inputType.type}
-                                placeholder={inputType.placeholder}
-                                name={inputType.name}
-                                onChange={this.updatePayload}
-                                defaultValue={item[inputType.name]}
-                            />
-                        </Form.Group>
-                    )}
+                    <Input
+                        item={item}
+                        entityInfo={entityInfo}
+                        readOnly={readOnly}
+                        updatePayload={this.updatePayload}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
-                    { removeView ?
-                    <Fragment>
-                        <span className="padding-right">Are you sure you want to remove?</span>
-                        <Button variant="secondary" onClick={this.toggleRemove}>
-                            No
-                        </Button>
-                        <Button variant="primary" onClick={this.remove}>
-                            Yes
-                        </Button>
-                    </Fragment> :
-                    <Fragment>
-                        { !!removeAction &&
-                        <Button variant="danger" onClick={this.toggleRemove}>
-                            Remove
-                        </Button> }
-                        <Button variant="secondary" onClick={this.toggleUpdate}>
-                            Cancel
-                        </Button>
-                        <Button variant="primary" onClick={this.update}>
-                            Update
-                        </Button>
-                    </Fragment> }
+                    <ActionBar
+                        disabled={disabled}
+                        updateAction={updateAction && this.update}
+                        removeAction={removeAction && this.remove}
+                        toggle={this.toggleUpdate}
+                        open={updateView}
+                    />
                 </Modal.Footer>
             </Modal>
         );
     }
 
     render() {
-        const { item, updateAction, entityInfo, readOnly } = this.props;
+        const { item, updateAction, removeAction, entityInfo, readOnly, useModal, hideActionBar } = this.props;
+        const { updateView } = this.state;
         const { inputTypes } = entityInfo;
         const { updating, removing } = item;
 
         return (
             <Fragment>
-                {this.modal()}
-                { !item.id && <div>loading...</div>}
-                { item.id && !!inputTypes && 
-                    inputTypes
-                    .filter(inputType => inputType.showInDisplayView === true)
-                    .map((inputType, index) =>
-                    <span className="padding-right" key={inputType.name}>
-                        {item[inputType.name]}
-                    </span>
-                )}
-                { item.id && !readOnly && !!updateAction &&
-                <Button 
-                    className="pull-right"
-                    variant="primary"
-                    onClick={this.toggleUpdate}
-                    disabled={updating || removing}
-                >
-                    Edit
-                </Button> }
+                {useModal && this.modal()}
+                <Input
+                    item={item}
+                    entityInfo={entityInfo}
+                    readOnly={useModal || (!useModal && !updateView)}
+                    updatePayload={this.updatePayload}
+                />
+                <span className='pull-right'>
+                    <ActionBar
+                        hide={!item.id || hideActionBar}
+                        disabled={updating || removing || !item.id || readOnly}
+                        updateAction={updateAction && this.update}
+                        removeAction={removeAction && this.remove}
+                        toggle={this.toggleUpdate}
+                        open={updateView}
+                    />
+                </span>
             </Fragment>
         );
     }
@@ -147,12 +128,16 @@ Item.propTypes = {
     item: PropTypes.object.isRequired,
     updateAction: PropTypes.func,
     removeAction: PropTypes.func,
-    readOnly: PropTypes.bool
+    readOnly: PropTypes.bool,
+    useModal: PropTypes.bool
 };
 
 Item.defaultProps = {
     item: {},
-    readOnly: false
+    readOnly: false,
+    updateView: false,
+    useModal: true,
+    hideActionBar: false
 };
 
 export default Item;

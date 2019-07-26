@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import Item from '../Item/Item';
+import Input from '../Input/Input';
+import ActionBar from '../ActionBar/ActionBar';
 import './List.css';
 
 class List extends Component {
@@ -45,7 +47,7 @@ class List extends Component {
 
     modal = () => {
         const { createView } = this.state;
-        const { entityInfo } = this.props;
+        const { entityInfo, createAction } = this.props;
         const { inputTypes, title } = entityInfo;
 
         return (
@@ -54,25 +56,17 @@ class List extends Component {
                     <Modal.Title>Create {title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    { !!inputTypes && inputTypes.map(inputType =>
-                        <Form.Group key={`input-${inputType.name}`}>
-                            <Form.Label>{inputType.label}</Form.Label>
-                            <Form.Control 
-                                type={inputType.type}
-                                placeholder={inputType.placeholder}
-                                name={inputType.name}
-                                onChange={this.updatePayload}
-                            />
-                        </Form.Group>
-                    )}
+                    <Input
+                        entityInfo={entityInfo}
+                        updatePayload={this.updatePayload}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.toggleCreate}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={this.create}>
-                        Create
-                    </Button>
+                    <ActionBar
+                        createAction={createAction && this.create}
+                        toggle={this.toggleCreate}
+                        open={createView}
+                    />
                 </Modal.Footer>
             </Modal>
         );
