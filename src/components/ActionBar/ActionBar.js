@@ -22,7 +22,7 @@ class ActionBar extends Component {
         const { removeView } = this.state;
 
         return (
-            <div className={`action-outer ${outerClass}`}>
+            <div className={outerClass}>
                 { hide ? null :
                 !open || toggleOnly ?
                 <Button className="action-button pull-right" variant="primary" onClick={toggle} disabled={disabled}>
@@ -31,10 +31,10 @@ class ActionBar extends Component {
                 removeView ?
                 <Container>
                     <Row>
-                        <Col className="action-col">
+                        <Col className="action-col" xs='6' sm='7'>
                             Are you sure you want to remove?
                         </Col>
-                        <Col className="action-col">
+                        <Col className="action-col" xs='6' sm='5'>
                             <Button className="action-button pull-right" variant="primary" onClick={removeAction}>
                                 Yes
                             </Button>

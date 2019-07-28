@@ -81,6 +81,7 @@ class Item extends Component {
                         removeAction={removeAction && this.remove}
                         toggle={this.toggleUpdate}
                         open={updateView}
+                        outerClass='max-width'
                     />
                 </Modal.Footer>
             </Modal>
@@ -102,17 +103,16 @@ class Item extends Component {
                     readOnly={useModal || (!useModal && !updateView)}
                     updatePayload={this.updatePayload}
                 />
-                <span className='pull-right'>
-                    <ActionBar
-                        hide={!item.id || hideActionBar}
-                        disabled={disabled || updating || removing || !item.id || readOnly}
-                        updateAction={updateAction && this.update}
-                        removeAction={removeAction && this.remove}
-                        toggle={this.toggleUpdate}
-                        open={updateView}
-                        toggleOnly={useModal}
-                    />
-                </span>
+                <ActionBar
+                    hide={!item.id || hideActionBar}
+                    disabled={disabled || updating || removing || !item.id || readOnly}
+                    updateAction={updateAction && this.update}
+                    removeAction={removeAction && this.remove}
+                    toggle={this.toggleUpdate}
+                    open={updateView}
+                    toggleOnly={useModal}
+                    outerClass='pull-right'
+                />
             </Fragment>
         );
     }

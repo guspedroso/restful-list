@@ -1,3 +1,7 @@
 .padding-right {
     padding-right: 2px;
 }
+
+.max-width {
+    width: 100%;
+}

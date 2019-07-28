@@ -66,6 +66,7 @@ class List extends Component {
                         createAction={createAction && this.create}
                         toggle={this.toggleCreate}
                         open={createView}
+                        outerClass='max-width'
                     />
                 </Modal.Footer>
             </Modal>
