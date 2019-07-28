@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import Input from '../Input/Input';
 import ActionBar from '../ActionBar/ActionBar';
 import './Item.css';
@@ -90,7 +90,6 @@ class Item extends Component {
     render() {
         const { item, updateAction, removeAction, entityInfo, readOnly, useModal, hideActionBar } = this.props;
         const { updateView } = this.state;
-        const { inputTypes } = entityInfo;
         const { updating, removing } = item;
 
         return (

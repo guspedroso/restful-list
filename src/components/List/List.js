@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import Item from '../Item/Item';
 import Input from '../Input/Input';
 import ActionBar from '../ActionBar/ActionBar';
@@ -48,7 +48,7 @@ class List extends Component {
     modal = () => {
         const { createView } = this.state;
         const { entityInfo, createAction } = this.props;
-        const { inputTypes, title } = entityInfo;
+        const { title } = entityInfo;
 
         return (
             <Modal show={createView} onHide={this.toggleCreate}>
