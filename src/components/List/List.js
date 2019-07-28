@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Item from '../Item/Item';
 import Input from '../Input/Input';
 import ActionBar from '../ActionBar/ActionBar';
@@ -74,29 +74,25 @@ class List extends Component {
 
     render() {
         const { entityInfo, list, createAction, updateAction, removeAction,
-                requesting, creating, error } = this.props;
+                requesting, creating, updating, removing, error } = this.props;
+        const { createView } = this.state;
         const { listTitle } = entityInfo;
         const colStyle = { span: 6, offset: 3 };
+        const disabled = creating || updating || removing;
 
         return (
             <Fragment>
                 {this.modal()}
                 <Container>
                     <Row>
-                        <Col className="list-row top" md={colStyle}>
+                        <Col className='list-row top' md={colStyle}>
                             <h2>{listTitle}</h2>
                         </Col>
                     </Row>
-                    { !!error ?
+                    { !!error || requesting ?
                     <Row>
-                        <Col className="list-row error" md={colStyle}>
-                            {error}
-                        </Col>
-                    </Row> :
-                    requesting ?
-                    <Row>
-                        <Col className="list-row" md={colStyle}>
-                            Loading...
+                        <Col className={`list-row${!!error && ' error'}`} md={colStyle}>
+                            {!!error ? error : requesting ? 'Loading...' : listTitle}
                         </Col>
                     </Row> :
                     !!list && list.map(item =>
@@ -107,6 +103,7 @@ class List extends Component {
                                     item={item}
                                     updateAction={updateAction}
                                     removeAction={removeAction}
+                                    disabled={disabled}
                                 />
                             </Col>
                         </Row>
@@ -114,14 +111,15 @@ class List extends Component {
                     { !!createAction &&
                     <Row>
                         <Col md={colStyle}>
-                            <Button 
-                                className="pull-right top" 
-                                variant="primary"
-                                onClick={this.toggleCreate}
-                                disabled={creating}
-                            >
-                                Add
-                            </Button>
+                            <ActionBar
+                                actionType='Add'
+                                createAction={createAction && this.create}
+                                toggle={this.toggleCreate}
+                                open={createView}
+                                outerClass='pull-right top'
+                                disabled={disabled}
+                                toggleOnly={true}
+                            />
                         </Col>
                     </Row> }
                 </Container>
@@ -137,6 +135,8 @@ List.propTypes = {
     updateAction: PropTypes.func,
     removeAction: PropTypes.func,
     requesting: PropTypes.bool,
+    updating: PropTypes.bool,
+    removing: PropTypes.bool,
     creating: PropTypes.bool,
     error: PropTypes.string,
 };
@@ -144,7 +144,9 @@ List.propTypes = {
 List.defaultProps = {
     list: [],
     requesting: true,
-    creating: false
+    creating: false,
+    updating: false,
+    removing: false
 };
 
 export default List;

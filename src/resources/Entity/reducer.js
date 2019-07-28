@@ -66,6 +66,7 @@ export const entities = (state={}, action) => {
         case constants.UPDATE_REQUEST:
             return {
                 ...state,
+                updating: true,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, updating: true, payload: action.payload} : entity
                 ) : [],
@@ -74,6 +75,7 @@ export const entities = (state={}, action) => {
         case constants.UPDATE_SUCCESS:
             return {
                 ...state,
+                updating: false,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, ...action.result, updating: false} : entity
                 ) : [],
@@ -82,6 +84,7 @@ export const entities = (state={}, action) => {
         case constants.UPDATE_FAILURE:
             return {
                 ...state,
+                updating: false,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, updating: false, error: action.error} : entity
                 ) : [],
@@ -90,6 +93,7 @@ export const entities = (state={}, action) => {
         case constants.REMOVE_REQUEST:
             return {
                 ...state,
+                removing: true,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, removing: true} : entity
                 ) : [],
@@ -98,12 +102,14 @@ export const entities = (state={}, action) => {
         case constants.REMOVE_SUCCESS:
             return {
                 ...state,
+                removing: false,
                 list: list.filter(item => item.id !== action.id),
                 item: !!item && item.id === action.id ? {} : item
             }
         case constants.REMOVE_FAILURE:
             return {
                 ...state,
+                removing: false,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, removing: false, error: action.error} : entity
                 ) : [],
@@ -117,6 +123,8 @@ export const entities = (state={}, action) => {
 /* These are all the possible values being set
     requesting: (bool)
     creating: (bool)
+    removing: (bool)
+    updating: (bool)
     error: (bool)
     options: (optional string for querying list)
     payload: (obj for creating item)

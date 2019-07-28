@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
+import './ActionBar.css';
 
 class ActionBar extends Component {
     constructor(props) {
@@ -16,44 +17,55 @@ class ActionBar extends Component {
     }
 
     render() {
-        const { hide, open, disabled, createAction, updateAction, removeAction, toggle, toggleOnly } = this.props;
+        const { hide, open, disabled, createAction, updateAction, 
+                removeAction, toggle, toggleOnly, actionType, outerClass } = this.props;
         const { removeView } = this.state;
 
         return (
-            <Fragment>
+            <div className={`action-outer ${outerClass}`}>
                 { hide ? null :
                 !open || toggleOnly ?
-                <Button variant="primary" onClick={toggle} disabled={disabled}>
-                    Edit
+                <Button className="action-button pull-right" variant="primary" onClick={toggle} disabled={disabled}>
+                    {actionType}
                 </Button> :
                 removeView ?
-                <Fragment>
-                    <span className="padding-right">Are you sure you want to remove?</span>
-                    <Button variant="secondary" onClick={this.toggleRemove}>
-                        No
-                    </Button>
-                    <Button variant="primary" onClick={removeAction}>
-                        Yes
-                    </Button>
-                </Fragment> :
-                <Fragment>
-                    { !!removeAction &&
-                    <Button variant="danger" onClick={this.toggleRemove} disabled={disabled}>
-                        Remove
-                    </Button> }
-                    <Button variant="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
-                    { !!updateAction &&
-                    <Button variant="primary" onClick={updateAction} disabled={disabled}>
-                        Update
-                    </Button> }
-                    { !!createAction &&
-                    <Button variant="primary" onClick={createAction} disabled={disabled}>
-                        Create
-                    </Button> }
-                </Fragment> }
-            </Fragment>
+                <Container>
+                    <Row>
+                        <Col className="action-col">
+                            Are you sure you want to remove?
+                        </Col>
+                        <Col className="action-col">
+                            <Button className="action-button pull-right" variant="primary" onClick={removeAction}>
+                                Yes
+                            </Button>
+                            <Button className="action-button pull-right" variant="secondary" onClick={this.toggleRemove}>
+                                No
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container> :
+                <Container>
+                    <Row>
+                        <Col className="action-col">
+                            { !!updateAction &&
+                            <Button className="action-button pull-right" variant="primary" onClick={updateAction} disabled={disabled}>
+                                Update
+                            </Button> }
+                            { !!createAction &&
+                            <Button className="action-button pull-right" variant="primary" onClick={createAction} disabled={disabled}>
+                                Create
+                            </Button> }
+                            <Button className="action-button pull-right" variant="secondary" onClick={toggle}>
+                                Cancel
+                            </Button>
+                            { !!removeAction &&
+                            <Button className="action-button pull-right" variant="danger" onClick={this.toggleRemove} disabled={disabled}>
+                                Remove
+                            </Button> }
+                        </Col>
+                    </Row>
+                </Container> }
+            </div>
         );
     }
 }
@@ -63,16 +75,21 @@ ActionBar.propTypes = {
     createAction: PropTypes.func,
     updateAction: PropTypes.func,
     removeAction: PropTypes.func,
+    disabled: PropTypes.bool,
     open: PropTypes.bool,
     hide: PropTypes.bool,
-    toggleOnly: PropTypes.bool
+    toggleOnly: PropTypes.bool,
+    actionName: PropTypes.string,
+    outerClass: PropTypes.string
 };
 
 ActionBar.defaultProps = {
     disabled: false,
     open: false,
     hide: false,
-    toggleOnly: false
+    toggleOnly: false,
+    actionType: 'Edit',
+    outerClass: ''
 };
 
 export default ActionBar;

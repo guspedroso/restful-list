@@ -88,7 +88,8 @@ class Item extends Component {
     }
 
     render() {
-        const { item, updateAction, removeAction, entityInfo, readOnly, useModal, hideActionBar } = this.props;
+        const { item, updateAction, removeAction, entityInfo, 
+                readOnly, useModal, hideActionBar, disabled } = this.props;
         const { updateView } = this.state;
         const { updating, removing } = item;
 
@@ -104,7 +105,7 @@ class Item extends Component {
                 <span className='pull-right'>
                     <ActionBar
                         hide={!item.id || hideActionBar}
-                        disabled={updating || removing || !item.id || readOnly}
+                        disabled={disabled || updating || removing || !item.id || readOnly}
                         updateAction={updateAction && this.update}
                         removeAction={removeAction && this.remove}
                         toggle={this.toggleUpdate}
@@ -123,7 +124,8 @@ Item.propTypes = {
     updateAction: PropTypes.func,
     removeAction: PropTypes.func,
     readOnly: PropTypes.bool,
-    useModal: PropTypes.bool
+    useModal: PropTypes.bool,
+    disabled: PropTypes.bool
 };
 
 Item.defaultProps = {
@@ -131,7 +133,8 @@ Item.defaultProps = {
     readOnly: false,
     updateView: false,
     useModal: true,
-    hideActionBar: false
+    hideActionBar: false,
+    disabled: false
 };
 
 export default Item;

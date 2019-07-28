@@ -11,7 +11,7 @@ class Entity extends Component {
     }
 
     render() {
-        const { list, requesting, creating, error, create, update, remove } = this.props;
+        const { list, requesting, creating, updating, removing, error, create, update, remove } = this.props;
 
         return (
             <List
@@ -19,6 +19,8 @@ class Entity extends Component {
                 list={list}
                 requesting={requesting}
                 creating={creating}
+                updating={updating}
+                removing={removing}
                 error={error}
                 createAction={create}
                 updateAction={update}
@@ -30,11 +32,13 @@ class Entity extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     const { entities } = state;
-    const { list, requesting, creating, error } = entities;
+    const { list, requesting, creating, updating, removing, error } = entities;
     return {
         list,
         requesting,
         creating,
+        updating,
+        removing,
         error
     }
 };
