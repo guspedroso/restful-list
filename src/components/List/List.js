@@ -74,12 +74,12 @@ class List extends Component {
     }
 
     render() {
-        const { entityInfo, list, createAction, updateAction, removeAction,
-                requesting, creating, updating, removing, error } = this.props;
-        const { createView } = this.state;
+        const { entityInfo, entities, createAction, updateAction, removeAction } = this.props;
+        const { list, requesting, creating, updating, removing, error } = entities;
         const { listTitle } = entityInfo;
+        const { createView } = this.state;
         const colStyle = { span: 6, offset: 3 };
-        const disabled = creating || updating || removing;
+        const disabled = !!creating || !!updating || !!removing;
 
         return (
             <Fragment>
@@ -90,10 +90,10 @@ class List extends Component {
                             <h2>{listTitle}</h2>
                         </Col>
                     </Row>
-                    { !!error || requesting ?
+                    { !!error || !!requesting ?
                     <Row>
                         <Col className={`list-row${!!error && ' error'}`} md={colStyle}>
-                            {!!error ? error : requesting ? 'Loading...' : listTitle}
+                            {!!error ? error : !!requesting ? 'Loading...' : listTitle}
                         </Col>
                     </Row> :
                     !!list && list.map(item =>
@@ -131,23 +131,14 @@ class List extends Component {
 
 List.propTypes = {
     entityInfo: PropTypes.object.isRequired,
-    list: PropTypes.array.isRequired,
+    entities: PropTypes.object.isRequired,
     createAction: PropTypes.func,
     updateAction: PropTypes.func,
-    removeAction: PropTypes.func,
-    requesting: PropTypes.bool,
-    updating: PropTypes.bool,
-    removing: PropTypes.bool,
-    creating: PropTypes.bool,
-    error: PropTypes.string,
+    removeAction: PropTypes.func
 };
 
 List.defaultProps = {
-    list: [],
-    requesting: true,
-    creating: false,
-    updating: false,
-    removing: false
+    entities: {}
 };
 
 export default List;

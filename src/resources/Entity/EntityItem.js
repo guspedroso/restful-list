@@ -7,6 +7,7 @@ import { entityInfo } from './constants';
 class Entity extends Component {
     componentDidMount() {
         const { getById, id } = this.props;
+
         if (id) {
             getById(id);
         }

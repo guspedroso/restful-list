@@ -7,21 +7,17 @@ import { entityInfo } from './constants';
 class Entity extends Component {
     componentDidMount() {
         const { getAll } = this.props;
+
         getAll();
     }
 
     render() {
-        const { list, requesting, creating, updating, removing, error, create, update, remove } = this.props;
+        const { entities, create, update, remove } = this.props;
 
         return (
             <List
                 entityInfo={entityInfo}
-                list={list}
-                requesting={requesting}
-                creating={creating}
-                updating={updating}
-                removing={removing}
-                error={error}
+                entities={entities}
                 createAction={create}
                 updateAction={update}
                 removeAction={remove}
@@ -32,14 +28,9 @@ class Entity extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     const { entities } = state;
-    const { list, requesting, creating, updating, removing, error } = entities;
+
     return {
-        list,
-        requesting,
-        creating,
-        updating,
-        removing,
-        error
+        entities
     }
 };
 
