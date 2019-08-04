@@ -125,9 +125,9 @@ Item.propTypes = {
     item: PropTypes.object.isRequired,
     updateAction: PropTypes.func,
     removeAction: PropTypes.func,
-    readOnly: PropTypes.bool,
-    useModal: PropTypes.bool,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool, // the values will only be displayed and not editable
+    useModal: PropTypes.bool, // if set to false, the input to update entity will be inline 
+    disabled: PropTypes.bool, // should we disable the input and buttons
     displayComponent: PropTypes.element // allow the user to override and show the display in other ways
 };
 

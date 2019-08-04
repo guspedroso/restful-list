@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from './actions';
 import List from '../../components/List/List';
+import EntityWrapper from './EntityWrapper';
 import EntityDisplay from './EntityDisplay';
 import { entityInfo } from './constants';
 
@@ -16,18 +17,20 @@ class Entity extends Component {
         const { entities, create, update, remove } = this.props;
 
         return (
-            <List
-                entityInfo={entityInfo}
-                entities={entities}
-                createAction={create}
-                updateAction={update}
-                removeAction={remove}
-                displayComponent={
-                    <EntityDisplay 
-                        listView={true}
-                    />
-                }
-            />
+            <EntityWrapper>
+                <List
+                    entityInfo={entityInfo}
+                    entities={entities}
+                    createAction={create}
+                    updateAction={update}
+                    removeAction={remove}
+                    displayComponent={
+                        <EntityDisplay 
+                            listView={true}
+                        />
+                    }
+                />
+            </EntityWrapper>
         );
     }
 }

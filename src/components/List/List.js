@@ -78,7 +78,6 @@ class List extends Component {
         const { list, requesting, creating, updating, removing, error } = entities;
         const { listTitle } = entityInfo;
         const { createView } = this.state;
-        const colStyle = { span: 6, offset: 3 };
         const disabled = !!creating || !!updating || !!removing;
 
         return (
@@ -86,19 +85,19 @@ class List extends Component {
                 {this.modal()}
                 <Container>
                     <Row>
-                        <Col className='list-row top' md={colStyle}>
+                        <Col className='list-row top'>
                             <h2>{listTitle}</h2>
                         </Col>
                     </Row>
                     { !!error || !!requesting ?
                     <Row>
-                        <Col className={`list-row${!!error && ' error'}`} md={colStyle}>
+                        <Col className={`list-row${!!error && ' error'}`}>
                             {!!error ? error : !!requesting ? 'Loading...' : listTitle}
                         </Col>
                     </Row> :
                     !!list && list.map(item =>
                         <Row key={item.id}>
-                            <Col className="list-row" md={colStyle}>
+                            <Col className="list-row">
                                 <Item
                                     entityInfo={entityInfo}
                                     item={item}
@@ -112,7 +111,7 @@ class List extends Component {
                     )}
                     { !!createAction &&
                     <Row>
-                        <Col md={colStyle}>
+                        <Col>
                             <Action
                                 actionType='Add'
                                 createAction={createAction && this.create}

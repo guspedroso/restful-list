@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from './actions';
 import Item from '../../components/Item/Item';
+import EntityWrapper from './EntityWrapper';
+import EntityDisplay from './EntityDisplay';
 import { entityInfo } from './constants';
 
 class Entity extends Component {
@@ -17,12 +19,17 @@ class Entity extends Component {
         const { item, update, remove } = this.props;
 
         return (
-            <Item
-                entityInfo={entityInfo}
-                item={item}
-                updateAction={update}
-                removeAction={remove}
-            />
+            <EntityWrapper>
+                <Item
+                    entityInfo={entityInfo}
+                    item={item}
+                    updateAction={update}
+                    removeAction={remove}
+                    displayComponent={
+                        <EntityDisplay />
+                    }
+                />
+            </EntityWrapper>
         );
     }
 }

@@ -7,6 +7,7 @@ class EntityDisplay extends PureComponent {
         const { item, listView } = this.props;
 
         return (
+            !item || !item.id ? null :
             <Fragment>
                 { listView ?
                 `${item.name}` :
@@ -17,8 +18,8 @@ class EntityDisplay extends PureComponent {
 }
 
 EntityDisplay.propTypes = {
-    entityInfo: PropTypes.object.isRequired,
-    item: PropTypes.object.isRequired,
+    entityInfo: PropTypes.object,
+    item: PropTypes.object,
     listView: PropTypes.bool.isRequired // we can change how it should look in a list
 };
 
