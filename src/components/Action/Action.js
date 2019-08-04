@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import './Action.css';
 
-class Action extends Component {
+class Action extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {

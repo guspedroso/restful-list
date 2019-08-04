@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
-class Input extends Component {
+class Input extends PureComponent {
 
     render() {
         const { item, entityInfo, updatePayload, readOnly, hideLabels, displayComponent } = this.props;
