@@ -54,6 +54,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
     item: {},
+    entityInfo: {},
     readOnly: false,
     hideLabels: false
 };

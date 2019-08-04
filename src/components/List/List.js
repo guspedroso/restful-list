@@ -139,7 +139,8 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-    entities: {}
+    entities: {},
+    entityInfo: {}
 };
 
 export default List;

@@ -133,6 +133,7 @@ Item.propTypes = {
 
 Item.defaultProps = {
     item: {},
+    entityInfo: {},
     readOnly: false,
     updateView: false,
     useModal: true,
