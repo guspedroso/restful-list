@@ -74,7 +74,7 @@ class List extends Component {
     }
 
     render() {
-        const { entityInfo, entities, createAction, updateAction, removeAction } = this.props;
+        const { entityInfo, entities, createAction, updateAction, removeAction, displayComponent } = this.props;
         const { list, requesting, creating, updating, removing, error } = entities;
         const { listTitle } = entityInfo;
         const { createView } = this.state;
@@ -105,6 +105,7 @@ class List extends Component {
                                     updateAction={updateAction}
                                     removeAction={removeAction}
                                     disabled={disabled}
+                                    displayComponent={displayComponent}
                                 />
                             </Col>
                         </Row>
@@ -134,7 +135,8 @@ List.propTypes = {
     entities: PropTypes.object.isRequired,
     createAction: PropTypes.func,
     updateAction: PropTypes.func,
-    removeAction: PropTypes.func
+    removeAction: PropTypes.func,
+    displayComponent: PropTypes.element // allow the user to override and show the display in other ways
 };
 
 List.defaultProps = {

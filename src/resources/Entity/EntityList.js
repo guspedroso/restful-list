@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from './actions';
 import List from '../../components/List/List';
+import EntityDisplay from './EntityDisplay';
 import { entityInfo } from './constants';
 
 class Entity extends Component {
@@ -21,6 +22,11 @@ class Entity extends Component {
                 createAction={create}
                 updateAction={update}
                 removeAction={remove}
+                displayComponent={
+                    <EntityDisplay 
+                        listView={true}
+                    />
+                }
             />
         );
     }

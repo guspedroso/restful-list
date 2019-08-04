@@ -57,7 +57,7 @@ class Item extends Component {
 
     modal = () => {
         const { updateView } = this.state;
-        const { entityInfo, item, removeAction, readOnly, updateAction } = this.props;
+        const { entityInfo, item, removeAction, readOnly, updateAction, displayComponent } = this.props;
         const { title } = entityInfo;
         const disabled = !item.id || readOnly;
 
@@ -72,6 +72,7 @@ class Item extends Component {
                         entityInfo={entityInfo}
                         readOnly={readOnly}
                         updatePayload={this.updatePayload}
+                        displayComponent={displayComponent}
                     />
                 </Modal.Body>
                 <Modal.Footer>
@@ -90,7 +91,7 @@ class Item extends Component {
 
     render() {
         const { item, updateAction, removeAction, entityInfo, 
-                readOnly, useModal, hideActionBar, disabled } = this.props;
+                readOnly, useModal, hideActionBar, disabled, displayComponent } = this.props;
         const { updateView } = this.state;
         const { updating, removing } = item;
 
@@ -102,6 +103,7 @@ class Item extends Component {
                     entityInfo={entityInfo}
                     readOnly={useModal || (!useModal && !updateView)}
                     updatePayload={this.updatePayload}
+                    displayComponent={displayComponent}
                 />
                 <ActionBar
                     hide={!item.id || hideActionBar}
@@ -125,7 +127,8 @@ Item.propTypes = {
     removeAction: PropTypes.func,
     readOnly: PropTypes.bool,
     useModal: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    displayComponent: PropTypes.element // allow the user to override and show the display in other ways
 };
 
 Item.defaultProps = {

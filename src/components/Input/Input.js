@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 class Input extends Component {
 
     render() {
-        const { item, updatePayload, entityInfo, readOnly, hideLabels } = this.props;
+        const { item, entityInfo, updatePayload, readOnly, hideLabels, displayComponent } = this.props;
         const { inputTypes } = entityInfo;
         const { updating, removing } = item;
 
@@ -13,6 +13,8 @@ class Input extends Component {
             <Fragment>
                 { !inputTypes ? null :
                 readOnly ?
+                !!displayComponent && React.isValidElement(displayComponent) ? 
+                React.cloneElement(displayComponent, {item, entityInfo}) :
                 inputTypes
                 .filter(inputType => inputType.canShow === true)
                 .map((inputType, index) =>
@@ -22,6 +24,7 @@ class Input extends Component {
                 inputTypes
                 .filter(inputType => inputType.canEdit === true)
                 .map(inputType =>
+                    inputType.type === 'text' ?
                     <Form.Group key={`input-${inputType.name}`}>
                         { !hideLabels &&
                         <Form.Label>{inputType.label}</Form.Label> }
@@ -33,7 +36,8 @@ class Input extends Component {
                             defaultValue={item[inputType.name]}
                             disabled={updating || removing}
                         />
-                    </Form.Group>
+                    </Form.Group> :
+                    null
                 )}
             </Fragment>
         );
@@ -45,6 +49,7 @@ Input.propTypes = {
     item: PropTypes.object.isRequired,
     updatePayload: PropTypes.func,
     readOnly: PropTypes.bool,
+    displayComponent: PropTypes.element // allow the user to override and show the display in other ways
 };
 
 Input.defaultProps = {
