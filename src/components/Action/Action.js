@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Row, Col } from 'react-bootstrap';
-import './ActionBar.css';
+import './Action.css';
 
-class ActionBar extends Component {
+class Action extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -70,7 +70,7 @@ class ActionBar extends Component {
     }
 }
 
-ActionBar.propTypes = {
+Action.propTypes = {
     toggle: PropTypes.func,
     createAction: PropTypes.func,
     updateAction: PropTypes.func,
@@ -83,7 +83,7 @@ ActionBar.propTypes = {
     outerClass: PropTypes.string
 };
 
-ActionBar.defaultProps = {
+Action.defaultProps = {
     disabled: false,
     open: false,
     hide: false,
@@ -92,4 +92,4 @@ ActionBar.defaultProps = {
     outerClass: ''
 };
 
-export default ActionBar;
+export default Action;

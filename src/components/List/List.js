@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Item from '../Item/Item';
 import Input from '../Input/Input';
-import ActionBar from '../ActionBar/ActionBar';
+import Action from '../Action/Action';
 import './List.css';
 
 class List extends Component {
@@ -62,7 +62,7 @@ class List extends Component {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <ActionBar
+                    <Action
                         createAction={createAction && this.create}
                         toggle={this.toggleCreate}
                         open={createView}
@@ -113,7 +113,7 @@ class List extends Component {
                     { !!createAction &&
                     <Row>
                         <Col md={colStyle}>
-                            <ActionBar
+                            <Action
                                 actionType='Add'
                                 createAction={createAction && this.create}
                                 toggle={this.toggleCreate}

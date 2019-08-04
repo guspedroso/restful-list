@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import Input from '../Input/Input';
-import ActionBar from '../ActionBar/ActionBar';
+import Action from '../Action/Action';
 import './Item.css';
 
 class Item extends Component {
@@ -76,7 +76,7 @@ class Item extends Component {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <ActionBar
+                    <Action
                         disabled={disabled}
                         updateAction={updateAction && this.update}
                         removeAction={removeAction && this.remove}
@@ -91,7 +91,7 @@ class Item extends Component {
 
     render() {
         const { item, updateAction, removeAction, entityInfo, 
-                readOnly, useModal, hideActionBar, disabled, displayComponent } = this.props;
+                readOnly, useModal, hideAction, disabled, displayComponent } = this.props;
         const { updateView } = this.state;
         const { updating, removing } = item;
 
@@ -105,8 +105,8 @@ class Item extends Component {
                     updatePayload={this.updatePayload}
                     displayComponent={displayComponent}
                 />
-                <ActionBar
-                    hide={!item.id || hideActionBar}
+                <Action
+                    hide={!item.id || hideAction}
                     disabled={disabled || updating || removing || !item.id || readOnly}
                     updateAction={updateAction && this.update}
                     removeAction={removeAction && this.remove}
@@ -136,7 +136,7 @@ Item.defaultProps = {
     readOnly: false,
     updateView: false,
     useModal: true,
-    hideActionBar: false,
+    hideAction: false,
     disabled: false
 };
 
