@@ -5,11 +5,12 @@ export const entityInfo = {
     inputTypes: [
         {
             label: 'Name',
-            type: 'text',
+            type: 'text', // we can dynamically adjust to this type of input.. checkbox, etc.
             placeholder: 'Enter name',
-            name: 'name',
-            required: true,
-            showInDisplayView: true
+            name: 'name', // this will be the key and what the name of the attribute is on backend
+            required: true, // required for creating or updating this entity
+            canShow: true, // if this is an attribute that you don't want to show anymore, set to false
+            canEdit: true // if you want to only show this value and not allow edit.. set to false
         },
     ]
 };

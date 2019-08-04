@@ -14,19 +14,17 @@ class Input extends Component {
                 { !inputTypes ? null :
                 readOnly ?
                 inputTypes
-                .filter(inputType => inputType.showInDisplayView === true)
+                .filter(inputType => inputType.canShow === true)
                 .map((inputType, index) =>
                 <span className="padding-right" key={inputType.name}>
                     {item[inputType.name]}
                 </span>) :
-                inputTypes.map(inputType =>
+                inputTypes
+                .filter(inputType => inputType.canEdit === true)
+                .map(inputType =>
                     <Form.Group key={`input-${inputType.name}`}>
                         { !hideLabels &&
                         <Form.Label>{inputType.label}</Form.Label> }
-                        { readOnly ?
-                        <div>
-                            {item[inputType.name]}
-                        </div> :
                         <Form.Control 
                             type={inputType.type}
                             placeholder={inputType.placeholder}
@@ -34,7 +32,7 @@ class Input extends Component {
                             onChange={updatePayload}
                             defaultValue={item[inputType.name]}
                             disabled={updating || removing}
-                        /> }
+                        />
                     </Form.Group>
                 )}
             </Fragment>
