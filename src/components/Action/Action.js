@@ -79,7 +79,7 @@ Action.propTypes = {
     open: PropTypes.bool,
     hide: PropTypes.bool,
     toggleOnly: PropTypes.bool,
-    actionName: PropTypes.string,
+    actionType: PropTypes.string,
     outerClass: PropTypes.string
 };
 

@@ -1,0 +1,409 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action types snapshots work 1`] = `
+<div
+  className=""
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={false}
+    type="button"
+  >
+    Test
+  </button>
+</div>
+`;
+
+exports[`Disabled snapshots work 1`] = `
+<div
+  className=""
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={true}
+    type="button"
+  >
+    Edit
+  </button>
+</div>
+`;
+
+exports[`Disabled snapshots work 2`] = `
+<div
+  className=""
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={false}
+    type="button"
+  >
+    Edit
+  </button>
+</div>
+`;
+
+exports[`Hide snapshots work 1`] = `
+<div
+  className=""
+/>
+`;
+
+exports[`Hide snapshots work 2`] = `
+<div
+  className=""
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={false}
+    type="button"
+  >
+    Edit
+  </button>
+</div>
+`;
+
+exports[`Open snapshots work 1`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open snapshots work 2`] = `
+<div
+  className=""
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={false}
+    type="button"
+  >
+    Edit
+  </button>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 1`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Create
+        </button>
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 2`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Update
+        </button>
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 3`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className="action-button pull-right btn btn-danger"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 4`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Update
+        </button>
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Create
+        </button>
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 5`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Create
+        </button>
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className="action-button pull-right btn btn-danger"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 6`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Update
+        </button>
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className="action-button pull-right btn btn-danger"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Open with different combinations of functions snapshots work 7`] = `
+<div
+  className=""
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="action-col col"
+      >
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Update
+        </button>
+        <button
+          className="action-button pull-right btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Create
+        </button>
+        <button
+          className="action-button pull-right btn btn-secondary"
+          disabled={false}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className="action-button pull-right btn btn-danger"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Outer class snapshots work 1`] = `
+<div
+  className="test"
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={false}
+    type="button"
+  >
+    Edit
+  </button>
+</div>
+`;
+
+exports[`Snapshot works 1`] = `
+<div
+  className=""
+>
+  <button
+    className="action-button pull-right btn btn-primary"
+    disabled={false}
+    type="button"
+  >
+    Edit
+  </button>
+</div>
+`;
