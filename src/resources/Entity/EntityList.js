@@ -36,7 +36,14 @@ class Entity extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { entities } = state;
+    let { entities, filter } = state;
+    let { filterValue } = filter;
+    let { list } = entities;
+
+    entities = {
+        ...entities,
+        list: !!list ? list.filter(item => item.name.toLowerCase().includes(!!filterValue ? filterValue : '')) : []
+    }
 
     return {
         entities

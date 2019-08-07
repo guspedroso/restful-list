@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Item from '../Item/Item';
 import Input from '../Input/Input';
+import Filter from '../Filter/Filter';
 import Action from '../Action/Action';
 import './List.css';
 
@@ -89,13 +90,19 @@ class List extends Component {
                             <h2>{listTitle}</h2>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col className='list-row top'>
+                            <Filter/>
+                        </Col>
+                    </Row>
                     { !!error || !!requesting ?
                     <Row>
                         <Col className={`list-row${!!error && ' error'}`}>
                             {!!error ? error : !!requesting ? 'Loading...' : listTitle}
                         </Col>
                     </Row> :
-                    !!list && list.map(item =>
+                    !!list && list
+                    .map(item =>
                         <Row key={item.id}>
                             <Col className="list-row">
                                 <Item
