@@ -37,4 +37,6 @@ export const constants = {
     REMOVE_REQUEST: `${constantsType}_REMOVE_REQUEST`,
     REMOVE_SUCCESS: `${constantsType}_REMOVE_SUCCESS`,
     REMOVE_FAILURE: `${constantsType}_REMOVE_FAILURE`,
+
+    SET_VALUE: `${constantsType}_SET_VALUE`,
 };

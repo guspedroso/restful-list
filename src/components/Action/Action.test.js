@@ -14,7 +14,7 @@ it('renders without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
-it('toggling the remove button works', () => {
+/*it('toggling the remove button works', () => {
     const wrapper = shallow(<Action />);
     const instance = wrapper.instance();
 
@@ -23,7 +23,7 @@ it('toggling the remove button works', () => {
     instance.toggleRemove();
 
     expect(wrapper.state('removeView')).toBe(true);
-});
+});*/
 
 test('Snapshot works', () => {
     let component = renderer.create(
