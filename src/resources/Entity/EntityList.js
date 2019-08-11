@@ -8,22 +8,18 @@ import { entityInfo } from './constants';
 
 class Entity extends Component {
     componentDidMount() {
-        const { getAll } = this.props;
+        const { getAllAction } = this.props;
 
-        getAll();
+        getAllAction();
     }
 
     render() {
-        const { entities, create, update, remove } = this.props;
 
         return (
             <EntityWrapper>
                 <List
+                    {...this.props}
                     entityInfo={entityInfo}
-                    entities={entities}
-                    createAction={create}
-                    updateAction={update}
-                    removeAction={remove}
                     displayComponent={
                         <EntityDisplay 
                             listView={true}
@@ -42,7 +38,7 @@ const mapStateToProps = (state, ownProps) => {
 
     entities = {
         ...entities,
-        list: !!list ? list.filter(item => item.name.toLowerCase().includes(!!filterValue ? filterValue : '')) : []
+        list: !!list ? list.filter(item => !!item.name && item.name.toLowerCase().includes(!!filterValue ? filterValue : '')) : []
     }
 
     return {
@@ -52,10 +48,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAll: (options) => dispatch(actions.getAll(options)),
-        create: (payload) => dispatch(actions.create(payload)),
-        update: (id, payload) => dispatch(actions.update(id, payload)),
-        remove: (id) => dispatch(actions.remove(id))
+        getAllAction: (options) => dispatch(actions.getAll(options)),
+        createAction: (payload) => dispatch(actions.create(payload)),
+        updateAction: (id, payload) => dispatch(actions.update(id, payload)),
+        removeAction: (id) => dispatch(actions.remove(id)),
+        setValueAction: (name, value) => dispatch(actions.setValue(name, value))
     }
 };
 

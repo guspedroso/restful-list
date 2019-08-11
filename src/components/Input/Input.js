@@ -31,7 +31,7 @@ const DisplayInputTypes = (props) => {
 }
 
 const EditInputTypes = (props) => {
-    const { entityInfo = {}, item = {}, hideLabels = false, updatePayload } = props;
+    const { entityInfo = {}, item = {}, hideLabels = false, payloadUpdate } = props;
     const { updating, removing } = item;
     const { inputTypes = [] } = entityInfo;
 
@@ -47,7 +47,7 @@ const EditInputTypes = (props) => {
                     type={inputType.type}
                     placeholder={inputType.placeholder}
                     name={inputType.name}
-                    onChange={updatePayload}
+                    onChange={payloadUpdate}
                     defaultValue={item[inputType.name]}
                     disabled={updating || removing}
                 />

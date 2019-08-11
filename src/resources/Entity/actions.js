@@ -1,5 +1,6 @@
 import { constants } from './constants';
 import { service } from './service';
+import { validation } from './validation';
 
 const getById = (id) => {
     const request = (id) => { return { type: constants.GETBYID_REQUEST, id } };
@@ -8,6 +9,15 @@ const getById = (id) => {
 
     return dispatch => {
         dispatch(request(id));
+
+        // perform validation to ensure the request is correct
+        let error = validation(constants.GETBYID_REQUEST, id);
+        if (error) {
+            dispatch(failure(error))
+            return;
+        }
+
+        // make a request to backend
         service.getById(id).then(
             result => dispatch(success(result)),
             error => dispatch(failure(error))
@@ -22,6 +32,15 @@ const getAll = (options) => {
 
     return dispatch => {
         dispatch(request(options));
+
+        // perform validation to ensure the request is correct
+        let error = validation(constants.GETALL_REQUEST, options);
+        if (error) {
+            dispatch(failure(error))
+            return;
+        }
+
+        // make a request to backend
         service.getAll(options).then(
             result => dispatch(success(result)),
             error => dispatch(failure(error))
@@ -36,6 +55,15 @@ const create = (payload) => {
 
     return dispatch => {
         dispatch(request(payload));
+
+        // perform validation to ensure the request is correct
+        let error = validation(constants.CREATE_REQUEST, payload);
+        if (error) {
+            dispatch(failure(error))
+            return;
+        }
+
+        // make a request to backend
         service.create(payload).then(
             result => dispatch(success(result)),
             error => dispatch(failure(error))
@@ -50,6 +78,15 @@ const update = (id, payload) => {
 
     return dispatch => {
         dispatch(request(id, payload));
+
+        // perform validation to ensure the request is correct
+        let error = validation(constants.UPDATE_REQUEST, payload);
+        if (error) {
+            dispatch(failure(id, error))
+            return;
+        }
+
+        // make a request to backend
         service.update(id, payload).then(
             result => dispatch(success(id, result)),
             error => dispatch(failure(id, error))
@@ -64,6 +101,15 @@ const remove = (id) => {
 
     return dispatch => {
         dispatch(request(id));
+
+        // perform validation to ensure the request is correct
+        let error = validation(constants.REMOVE_REQUEST, id);
+        if (error) {
+            dispatch(failure(id, error))
+            return;
+        }
+
+        // make a request to backend
         service.remove(id).then(
             result => dispatch(success(id, result)),
             error => dispatch(failure(id, error))
@@ -71,10 +117,13 @@ const remove = (id) => {
     }
 };
 
+const setValue = (name, value) => { return { type: constants.SET_VALUE, name, value } };
+
 export const actions = {
     getById,
     getAll,
     create,
     update,
-    remove
+    remove,
+    setValue
 };

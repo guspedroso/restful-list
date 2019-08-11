@@ -4,6 +4,11 @@ export const entities = (state={}, action) => {
     const { list, item } = state;
 
     switch (action.type) {
+        case constants.SET_VALUE:
+            return {
+                ...state,
+                [action.name]: action.value
+            }
         case constants.GETBYID_REQUEST:
             return {
                 ...state,
@@ -54,12 +59,14 @@ export const entities = (state={}, action) => {
         case constants.CREATE_SUCCESS:
             return {
                 ...state,
+                created: true,
                 creating: false,
                 list: !!list ? [...list, action.result] : [action.result]
             }
         case constants.CREATE_FAILURE:
             return {
                 ...state,
+                created: false,
                 creating: false,
                 error: action.error
             }
@@ -75,15 +82,17 @@ export const entities = (state={}, action) => {
         case constants.UPDATE_SUCCESS:
             return {
                 ...state,
+                updated: true,
                 updating: false,
                 list: !!list ? list.map(entity => 
-                    entity.id === action.id ? {...entity, ...action.result, updating: false} : entity
+                    entity.id === action.id ? {...entity, ...action.result, updating: false, error: undefined} : entity
                 ) : [],
-                item: !!item && item.id === action.id ? {...item, ...action.result, updating: false} : item
+                item: !!item && item.id === action.id ? {...item, ...action.result, updating: false, error: undefined} : item
             }
         case constants.UPDATE_FAILURE:
             return {
                 ...state,
+                updated: false,
                 updating: false,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, updating: false, error: action.error} : entity
@@ -102,6 +111,7 @@ export const entities = (state={}, action) => {
         case constants.REMOVE_SUCCESS:
             return {
                 ...state,
+                removed: true,
                 removing: false,
                 list: list.filter(item => item.id !== action.id),
                 item: !!item && item.id === action.id ? {} : item
@@ -109,6 +119,7 @@ export const entities = (state={}, action) => {
         case constants.REMOVE_FAILURE:
             return {
                 ...state,
+                removed: false,
                 removing: false,
                 list: !!list ? list.map(entity => 
                     entity.id === action.id ? {...entity, removing: false, error: action.error} : entity
@@ -126,6 +137,9 @@ export const entities = (state={}, action) => {
     removing: (bool)
     updating: (bool)
     error: (bool)
+    created: (bool)
+    updated: (bool)
+    removed: (bool)
     options: (optional string for querying list)
     payload: (obj for creating item)
     item: (obj)

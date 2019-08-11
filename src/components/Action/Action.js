@@ -22,10 +22,10 @@ const Action = (props) => {
                         Are you sure you want to remove?
                     </Col>
                     <Col className="action-col" xs='6' sm='5'>
-                        <Button className="action-button pull-right" variant="primary" onClick={removeAction}>
+                        <Button className="action-button pull-right" variant="primary" onClick={removeAction} disabled={disabled}>
                             Yes
                         </Button>
-                        <Button className="action-button pull-right" variant="secondary" onClick={() => updateRemoveView(!removeView)}>
+                        <Button className="action-button pull-right" variant="secondary" onClick={() => updateRemoveView(!removeView)} disabled={disabled}>
                             No
                         </Button>
                     </Col>
@@ -42,7 +42,7 @@ const Action = (props) => {
                         <Button className="action-button pull-right" variant="primary" onClick={createAction} disabled={disabled}>
                             Create
                         </Button> }
-                        <Button className="action-button pull-right" variant="secondary" onClick={toggle}>
+                        <Button className="action-button pull-right" variant="secondary" onClick={toggle} disabled={disabled}>
                             Cancel
                         </Button>
                         { !!removeAction &&
