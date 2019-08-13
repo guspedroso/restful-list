@@ -8,23 +8,23 @@ import { entityInfo } from './constants';
 
 class Entity extends Component {
     componentDidMount() {
-        const { getById, id } = this.props;
+        const { getByIdAction, id } = this.props;
 
         if (id) {
-            getById(id);
+            getByIdAction(id);
         }
     }
 
     render() {
-        const { item, update, remove } = this.props;
+        const { item, updateAction, removeAction } = this.props;
 
         return (
             <EntityWrapper>
                 <Item
                     entityInfo={entityInfo}
                     item={item}
-                    updateAction={update}
-                    removeAction={remove}
+                    updateAction={updateAction}
+                    removeAction={removeAction}
                     displayComponent={
                         <EntityDisplay />
                     }
@@ -45,9 +45,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getById: (id) => dispatch(actions.getById(id)),
-        update: (id, payload) => dispatch(actions.update(id, payload)),
-        remove: (id) => dispatch(actions.remove(id))
+        getByIdAction: (id) => dispatch(actions.getById(id)),
+        updateAction: (id, payload) => dispatch(actions.update(id, payload)),
+        removeAction: (id) => dispatch(actions.remove(id))
     }
 };
 

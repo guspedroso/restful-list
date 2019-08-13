@@ -46,6 +46,7 @@ const EditInputTypes = (props) => {
                 { inputType.type === 'text' ?
                 <TextInput
                     handlePayload={handlePayload}
+                    item={item}
                     inputType={inputType}
                     hideLabel={hideLabels}
                     disabled={disabled}
@@ -61,7 +62,7 @@ const TextInput = (props) => {
             handlePayload, disabled = false } = props;
 
     return (
-        <Form.Group key={`input-${inputType.name}`}>
+        <Form.Group>
             { !hideLabel &&
             <Form.Label>{inputType.label}</Form.Label> }
             <Form.Control 
