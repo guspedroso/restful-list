@@ -7,36 +7,42 @@ import Action from '../Action/Action';
 import './List.css';
 
 const List = (props) => {
-    const [ createView, createViewToggle ] = useState(false);
-    const [ payload, payloadUpdate ] = useState({});
-    const { entityInfo = {}, entities = {}, setValueAction, createAction } = props;
+    const [ createView, setCreateView ] = useState(false);
+    const [ payload, setPayload ] = useState({});
+
+    const { entityInfo = {}, entities = {}, valueAction, createAction } = props;
     const { list = [], requesting = false, created = false, creating = false, updating = false, removing = false, error } = entities;
     const { listTitle } = entityInfo;
-    const disabled = !!creating || !!updating || !!removing;
+    const disabled = creating || updating || removing;
 
     useEffect(() => {
         // reset the payload anytime they toggle the modal view
-        payloadUpdate({});
+        setPayload({});
     }, [createView]);
 
     useEffect(() => {
         // if it was created successfully then we close the modal
         if (created) {
             if (createView) {
-                createViewToggle(false);
+                setCreateView(false);
             }
-            setValueAction('created', false);
+            valueAction('created', false);
         }
-    }, [created, setValueAction, createView]);
+    }, [created, createView, valueAction]);
+
+    const handleCreate = () => createAction(payload);
+    const handlePayload = event => setPayload({...payload, [event.target.name]: event.target.value});
+    const handleToggle = () => setCreateView(!createView);
 
     return (
         <Fragment>
-            <ListModal 
-                {...props}
+            <ListModal
+                disabled={disabled}
+                entityInfo={entityInfo}
                 createView={createView}
-                createViewToggle={createViewToggle}
-                payload={payload}
-                payloadUpdate={payloadUpdate} 
+                handleCreate={handleCreate}
+                handleToggle={handleToggle}
+                handlePayload={handlePayload} 
             />
             <Container>
                 <Row>
@@ -73,45 +79,45 @@ const List = (props) => {
                         </Col>
                     </Row>
                 )}
-                { !!createAction &&
                 <Row>
                     <Col>
                         <Action
                             actionType='Add'
-                            createAction={() => createAction(payload)}
-                            toggle={() => createViewToggle(!createView)}
+                            handleCreate={handleCreate}
+                            handleToggle={handleToggle}
                             open={createView}
                             outerClass='pull-right top'
                             disabled={disabled}
                             toggleOnly={true}
                         />
                     </Col>
-                </Row> }
+                </Row>
             </Container>
         </Fragment>
     );
 }
 
 const ListModal = (props) => {
-    const { entityInfo = {}, createAction, createView, 
-            createViewToggle, payloadUpdate, payload } = props;
+    const { entityInfo = {}, createView = false, disabled = false,
+            handleCreate, handleToggle, handlePayload } = props;
     const { title } = entityInfo;
 
     return (
-        <Modal show={createView} onHide={() => createViewToggle(!createView)}>
+        <Modal show={createView} onHide={handleToggle}>
             <Modal.Header closeButton>
                 <Modal.Title>Create {title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Input
                     entityInfo={entityInfo}
-                    payloadUpdate={e => payloadUpdate({...payload, [e.target.name]: e.target.value})}
+                    handlePayload={handlePayload}
                 />
             </Modal.Body>
             <Modal.Footer>
                 <Action
-                    createAction={() => createAction(payload)}
-                    toggle={() => createViewToggle(!createView)}
+                    disabled={disabled}
+                    handleCreate={handleCreate}
+                    handleToggle={handleToggle}
                     open={createView}
                     outerClass='max-width'
                 />

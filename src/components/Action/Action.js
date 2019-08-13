@@ -3,16 +3,19 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import './Action.css';
 
 const Action = (props) => {
-    const [removeView, updateRemoveView] = useState(false);
+    const [removeView, setRemoveView] = useState(false);
+
     const { hide = false, open = false, disabled = false,
             toggleOnly = false, actionType = 'Edit', outerClass = '',
-            createAction, updateAction, removeAction, toggle } = props;
+            handleCreate, handleUpdate, handleRemove, handleToggle } = props;
+
+    const handleRemoveView = () => setRemoveView(!removeView);
 
     return (
         <div className={outerClass}>
             { hide ? null :
             !open || toggleOnly ?
-            <Button className="action-button pull-right" variant="primary" onClick={toggle} disabled={disabled}>
+            <Button className="action-button pull-right" variant="primary" onClick={handleToggle} disabled={disabled}>
                 {actionType}
             </Button> :
             removeView ?
@@ -22,10 +25,10 @@ const Action = (props) => {
                         Are you sure you want to remove?
                     </Col>
                     <Col className="action-col" xs='6' sm='5'>
-                        <Button className="action-button pull-right" variant="primary" onClick={removeAction} disabled={disabled}>
+                        <Button className="action-button pull-right" variant="primary" onClick={handleRemove} disabled={disabled}>
                             Yes
                         </Button>
-                        <Button className="action-button pull-right" variant="secondary" onClick={() => updateRemoveView(!removeView)} disabled={disabled}>
+                        <Button className="action-button pull-right" variant="secondary" onClick={handleRemoveView} disabled={disabled}>
                             No
                         </Button>
                     </Col>
@@ -34,19 +37,19 @@ const Action = (props) => {
             <Container>
                 <Row>
                     <Col className="action-col">
-                        { !!updateAction &&
-                        <Button className="action-button pull-right" variant="primary" onClick={updateAction} disabled={disabled}>
+                        { !!handleUpdate &&
+                        <Button className="action-button pull-right" variant="primary" onClick={handleUpdate} disabled={disabled}>
                             Update
                         </Button> }
-                        { !!createAction &&
-                        <Button className="action-button pull-right" variant="primary" onClick={createAction} disabled={disabled}>
+                        { !!handleCreate &&
+                        <Button className="action-button pull-right" variant="primary" onClick={handleCreate} disabled={disabled}>
                             Create
                         </Button> }
-                        <Button className="action-button pull-right" variant="secondary" onClick={toggle} disabled={disabled}>
+                        <Button className="action-button pull-right" variant="secondary" onClick={handleToggle} disabled={disabled}>
                             Cancel
                         </Button>
-                        { !!removeAction &&
-                        <Button className="action-button pull-right" variant="danger" onClick={() => updateRemoveView(!removeView)} disabled={disabled}>
+                        { !!handleRemove &&
+                        <Button className="action-button pull-right" variant="danger" onClick={handleRemoveView} disabled={disabled}>
                             Remove
                         </Button> }
                     </Col>

@@ -5,32 +5,39 @@ import Action from '../Action/Action';
 import './Item.css';
 
 const Item = (props) => {
-    const [ updateView, updateViewToggle ] = useState(false);
-    const [ payload, payloadUpdate ] = useState({});
-    const { entities = {}, item = {}, entityInfo = {}, setValueAction, updateAction, removeAction, displayComponent,
-            readOnly = false, useModal = true, hideAction = false, disabled = false  } = props;
+    const [ updateView, setUpdateView ] = useState(false);
+    const [ payload, setPayload ] = useState({});
+
+    const { entities = {}, item = {}, entityInfo = {}, valueAction, updateAction, removeAction, displayComponent,
+            readOnly = false, useModal = true, hide = false, disabled = false  } = props;
     const { updating = false, removing = false, id } = item;
     const { updated = false, removed = false } = entities;
+    const actionDisabled = disabled || updating || removing || !item.id || readOnly;
 
     useEffect(() => {
         // reset the payload anytime they toggle the modal view
-        payloadUpdate({});
+        setPayload({});
     }, [updateView]); 
 
     useEffect(() => {
         // if it was updated successfully then we close the modal
         if (updated) {
             if (updateView) {
-                updateViewToggle(false);
+                setUpdateView(false);
             }
-            setValueAction('updated', false);
+            valueAction('updated', false);
         } else if (removed) {
             if (updateView) {
-                updateViewToggle(false);
+                setUpdateView(false);
             }
-            setValueAction('removed', false);
+            valueAction('removed', false);
         }
-    }, [updated, removed, setValueAction, updateView]);
+    }, [updated, removed, updateView, valueAction]);
+
+    const handleUpdate = () => updateAction(id, payload);
+    const handleRemove = () => removeAction(id);
+    const handlePayload = event => setPayload({...payload, [event.target.name]: event.target.value});
+    const handleToggle = () => setUpdateView(!updateView);
 
     return (
         <Fragment>
@@ -38,23 +45,26 @@ const Item = (props) => {
             <ItemModal 
                 {...props}
                 updateView={updateView}
-                updateViewToggle={updateViewToggle}
                 payload={payload}
-                payloadUpdate={payloadUpdate} 
+                handleToggle={handleToggle}
+                handleUpdate={handleUpdate}
+                handleRemove={handleRemove}
+                handlePayload={handlePayload} 
+                actionDisabled={actionDisabled}
             /> }
             <Input
                 item={item}
                 entityInfo={entityInfo}
                 readOnly={useModal || (!useModal && !updateView)}
-                payloadUpdate={e => payloadUpdate({...payload, [e.target.name]: e.target.value})}
+                handlePayload={handlePayload}
                 displayComponent={displayComponent}
             />
             <Action
-                hide={!item.id || hideAction}
-                disabled={disabled || updating || removing || !item.id || readOnly}
-                updateAction={() => updateAction(id, payload)}
-                removeAction={() => removeAction(id)}
-                toggle={() => updateViewToggle(!updateView)}
+                hide={!item.id || hide}
+                disabled={actionDisabled}
+                handleUpdate={handleUpdate}
+                handleRemove={handleRemove}
+                handleToggle={handleToggle}
                 open={updateView}
                 toggleOnly={useModal}
                 outerClass='pull-right'
@@ -64,14 +74,14 @@ const Item = (props) => {
 }
 
 const ItemModal = (props) => {
-    const { item = {}, entityInfo = {}, updateAction, removeAction, displayComponent,
-            readOnly = false, disabled = false,
-            payloadUpdate, updateViewToggle, updateView, payload } = props;
-    const { updating, removing, id } = item;
+    const { item = {}, entityInfo = {}, 
+            handleUpdate, handleRemove, displayComponent,
+            handleToggle, handlePayload, updateView = false,
+            actionDisabled = false, readOnly = false } = props;
     const { title = '' } = entityInfo;
 
     return (
-        <Modal show={updateView} onHide={() => updateViewToggle(!updateView)}>
+        <Modal show={updateView} onHide={handleToggle}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
@@ -80,16 +90,16 @@ const ItemModal = (props) => {
                     item={item}
                     entityInfo={entityInfo}
                     readOnly={readOnly}
-                    payloadUpdate={e => payloadUpdate({...payload, [e.target.name]: e.target.value})}
+                    handlePayload={handlePayload}
                     displayComponent={displayComponent}
                 />
             </Modal.Body>
             <Modal.Footer>
                 <Action
-                    disabled={disabled || updating || removing || !item.id || readOnly}
-                    updateAction={() => updateAction(id, payload)}
-                    removeAction={() => removeAction(id)}
-                    toggle={() => updateViewToggle(!updateView)}
+                    disabled={actionDisabled}
+                    handleUpdate={handleUpdate}
+                    handleRemove={handleRemove}
+                    handleToggle={handleToggle}
                     open={updateView}
                     outerClass='max-width'
                 />

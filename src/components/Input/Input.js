@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import { Form } from 'react-bootstrap';
 
 const Input = (props) => {
-    const { item = {}, entityInfo = {}, readOnly = false, displayComponent } = props;
+    const { item = {}, entityInfo = {},
+            readOnly = false, displayComponent } = props;
 
     return (
         readOnly ?
@@ -10,13 +11,13 @@ const Input = (props) => {
             {/* If custom display is passed in, use that.. otherwise just default view */}
             { !!displayComponent && React.isValidElement(displayComponent) ? 
             React.cloneElement(displayComponent, {item, entityInfo}) :
-            <DisplayInputTypes {...props} /> }
+            <DefaultDisplayInput {...props} /> }
         </Fragment> :
         <EditInputTypes {...props} />
     );
 }
 
-const DisplayInputTypes = (props) => {
+const DefaultDisplayInput = (props) => {
     const { entityInfo = {}, item = {} } = props;
     const { inputTypes = [] } = entityInfo;
 
@@ -31,29 +32,47 @@ const DisplayInputTypes = (props) => {
 }
 
 const EditInputTypes = (props) => {
-    const { entityInfo = {}, item = {}, hideLabels = false, payloadUpdate } = props;
-    const { updating, removing } = item;
+    const { entityInfo = {}, item = {}, 
+            hideLabels = false, handlePayload } = props;
     const { inputTypes = [] } = entityInfo;
+    const { updating = false, removing = false } = item;
+    const disabled = updating || removing;
 
     return (
         inputTypes
         .filter(inputType => inputType.canEdit === true)
-        .map(inputType =>
-            inputType.type === 'text' ?
-            <Form.Group key={`input-${inputType.name}`}>
-                { !hideLabels &&
-                <Form.Label>{inputType.label}</Form.Label> }
-                <Form.Control 
-                    type={inputType.type}
-                    placeholder={inputType.placeholder}
-                    name={inputType.name}
-                    onChange={payloadUpdate}
-                    defaultValue={item[inputType.name]}
-                    disabled={updating || removing}
-                />
-            </Form.Group> :
-            null
+        .map((inputType, index) =>
+            <Fragment key={`${inputType.type}-${index}`}>
+                { inputType.type === 'text' ?
+                <TextInput
+                    handlePayload={handlePayload}
+                    inputType={inputType}
+                    hideLabel={hideLabels}
+                    disabled={disabled}
+                /> :
+                null }
+            </Fragment>
         )
+    );
+}
+
+const TextInput = (props) => {
+    const { inputType = {}, item = {}, hideLabel = false,
+            handlePayload, disabled = false } = props;
+
+    return (
+        <Form.Group key={`input-${inputType.name}`}>
+            { !hideLabel &&
+            <Form.Label>{inputType.label}</Form.Label> }
+            <Form.Control 
+                type={inputType.type}
+                placeholder={inputType.placeholder}
+                name={inputType.name}
+                onChange={handlePayload}
+                defaultValue={item[inputType.name]}
+                disabled={disabled}
+            />
+        </Form.Group>
     );
 }
 

@@ -4,7 +4,9 @@ import { Form } from 'react-bootstrap';
 import { actions } from './actions';
 
 const Filter = (props) => {
-    const { filterValue = '', placeholder = 'Filter...', set } = props;
+    const { filterValue = '', placeholder = 'Filter...', setAction } = props;
+
+    const handleChange = event => setAction(event.target.value);
 
     return (
         <Form.Group>
@@ -12,7 +14,7 @@ const Filter = (props) => {
                 type='text'
                 placeholder={placeholder}
                 name={filterValue}
-                onChange={e => set(e.target.value)}
+                onChange={handleChange}
             />
         </Form.Group>
     );
@@ -29,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        set: (filterValue) => dispatch(actions.set(filterValue))
+        setAction: (filterValue) => dispatch(actions.set(filterValue))
     }
 };
 

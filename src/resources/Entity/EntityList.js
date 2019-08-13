@@ -52,7 +52,7 @@ const mapDispatchToProps = dispatch => {
         createAction: (payload) => dispatch(actions.create(payload)),
         updateAction: (id, payload) => dispatch(actions.update(id, payload)),
         removeAction: (id) => dispatch(actions.remove(id)),
-        setValueAction: (name, value) => dispatch(actions.setValue(name, value))
+        valueAction: (name, value) => dispatch(actions.setValue(name, value))
     }
 };
 
