@@ -1,6 +1,5 @@
 import React from 'react';
-import EntityList from '../../resources/Entity/EntityList';
-// import EntityItem from '../../resources/Entity/EntityItem';
+import { EntityList } from '../../resources/Entity';
 import './App.css';
 
 const App = () => {

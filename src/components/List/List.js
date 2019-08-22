@@ -1,9 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
-import Item from '../Item/Item';
-import Input from '../Input/Input';
-import Filter from '../Filter/Filter';
-import Action from '../Action/Action';
+import { Item, Input, Filter, Action } from '../../components';
 import './List.css';
 
 const List = (props) => {

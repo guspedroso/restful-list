@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
-import Input from '../Input/Input';
-import Action from '../Action/Action';
+import { Input, Action } from '../../components';
 import './Item.css';
 
 const Item = (props) => {

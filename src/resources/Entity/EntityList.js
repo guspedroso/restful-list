@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from './actions';
-import List from '../../components/List/List';
-import EntityWrapper from './EntityWrapper';
-import EntityDisplay from './EntityDisplay';
+import { List } from '../../components';
+import { EntityWrapper, EntityDisplay } from '../Entity';
 import { entityInfo } from './constants';
 
 class Entity extends Component {
