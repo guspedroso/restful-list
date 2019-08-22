@@ -116,14 +116,6 @@ exports[`Open with different combinations of functions snapshots work 1`] = `
         className="action-col col"
       >
         <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Create
-        </button>
-        <button
           className="action-button pull-right btn btn-secondary"
           disabled={false}
           type="button"
@@ -149,14 +141,6 @@ exports[`Open with different combinations of functions snapshots work 2`] = `
       <div
         className="action-col col"
       >
-        <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Update
-        </button>
         <button
           className="action-button pull-right btn btn-secondary"
           disabled={false}
@@ -190,14 +174,6 @@ exports[`Open with different combinations of functions snapshots work 3`] = `
         >
           Cancel
         </button>
-        <button
-          className="action-button pull-right btn btn-danger"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Remove
-        </button>
       </div>
     </div>
   </div>
@@ -217,22 +193,6 @@ exports[`Open with different combinations of functions snapshots work 4`] = `
       <div
         className="action-col col"
       >
-        <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Update
-        </button>
-        <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Create
-        </button>
         <button
           className="action-button pull-right btn btn-secondary"
           disabled={false}
@@ -260,27 +220,11 @@ exports[`Open with different combinations of functions snapshots work 5`] = `
         className="action-col col"
       >
         <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Create
-        </button>
-        <button
           className="action-button pull-right btn btn-secondary"
           disabled={false}
           type="button"
         >
           Cancel
-        </button>
-        <button
-          className="action-button pull-right btn btn-danger"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Remove
         </button>
       </div>
     </div>
@@ -302,27 +246,11 @@ exports[`Open with different combinations of functions snapshots work 6`] = `
         className="action-col col"
       >
         <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Update
-        </button>
-        <button
           className="action-button pull-right btn btn-secondary"
           disabled={false}
           type="button"
         >
           Cancel
-        </button>
-        <button
-          className="action-button pull-right btn btn-danger"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Remove
         </button>
       </div>
     </div>
@@ -344,35 +272,11 @@ exports[`Open with different combinations of functions snapshots work 7`] = `
         className="action-col col"
       >
         <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Update
-        </button>
-        <button
-          className="action-button pull-right btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Create
-        </button>
-        <button
           className="action-button pull-right btn btn-secondary"
           disabled={false}
           type="button"
         >
           Cancel
-        </button>
-        <button
-          className="action-button pull-right btn btn-danger"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Remove
         </button>
       </div>
     </div>
