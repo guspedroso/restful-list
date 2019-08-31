@@ -1,22 +1,30 @@
 import PropTypes from 'prop-types';
 
+// every input type follows this shape
+const inputTypePropType = PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
+    required: PropTypes.bool,
+    canShow: PropTypes.bool,
+    canEdit: PropTypes.bool
+});
+
+// array of input types for each entity
+const inputTypesPropType = PropTypes.arrayOf(
+    inputTypePropType
+).isRequired;
+
+// every entity will have this type of info
 export const entityInfoPropType = PropTypes.shape({
     apiType: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     listTitle: PropTypes.string.isRequired,
-    inputTypes: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            type: PropTypes.string.isRequired,
-            label: PropTypes.string,
-            placeholder: PropTypes.string,
-            required: PropTypes.bool,
-            canShow: PropTypes.bool,
-            canEdit: PropTypes.bool
-        })
-    ).isRequired
+    inputTypes: inputTypesPropType
 }).isRequired;
 
+// ever list of entities will be shaped like this
 export const entitiesPropType = PropTypes.shape({
     list: PropTypes.array.isRequired,
     requesting: PropTypes.bool,

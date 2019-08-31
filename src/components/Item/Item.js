@@ -1,17 +1,19 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import { Input, Action } from '../../components';
+import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 import './Item.css';
 
 const Item = (props) => {
     const [ updateView, setUpdateView ] = useState(false);
     const [ payload, setPayload ] = useState({});
 
-    const { entities = {}, item = {}, entityInfo = {}, valueAction, updateAction, removeAction, displayComponent,
-            readOnly = false, useModal = true, hide = false, disabled = false  } = props;
-    const { updating = false, removing = false, id } = item;
-    const { updated = false, removed = false } = entities;
-    const actionDisabled = disabled || updating || removing || !item.id || readOnly;
+    const { entities, item, entityInfo, valueAction, updateAction, removeAction,
+            displayComponent, readOnly, useModal, hide, disabled } = props;
+    const { updating, removing, id } = item;
+    const { updated, removed } = entities;
+    const actionDisabled = !id || disabled || updating || removing || readOnly;
 
     useEffect(() => {
         // reset the payload anytime they toggle the modal view
@@ -72,18 +74,39 @@ const Item = (props) => {
     );
 }
 
+Item.propTypes = {
+    entityInfo: entityInfoPropType,
+    entities: entitiesPropType,
+    item: PropTypes.object.isRequired,
+    valueAction: PropTypes.func,
+    updateAction: PropTypes.func,
+    removeAction: PropTypes.func,
+    displayComponent: PropTypes.element,
+    readOnly: PropTypes.bool,
+    useModal: PropTypes.bool,
+    hide: PropTypes.bool,
+    disabled: PropTypes.bool
+};
+
+Item.defaultProps = {
+    item: {},
+    readOnly: false,
+    useModal: true,
+    hide: false,
+    disabled: false
+};
+
 const ItemModal = (props) => {
-    const { item = {}, entityInfo = {}, 
-            handleUpdate, handleRemove, displayComponent,
-            handleToggle, handlePayload, updateView = false,
-            actionDisabled = false, readOnly = false } = props;
-    const { title = '' } = entityInfo;
+    const { item, entityInfo, handleUpdate, handleRemove, displayComponent,
+            handleToggle, handlePayload, updateView, actionDisabled, readOnly } = props;
+    const { title } = entityInfo;
 
     return (
         <Modal show={updateView} onHide={handleToggle}>
+            { !!title &&
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
+            </Modal.Header> }
             <Modal.Body>
                 <Input
                     item={item}
@@ -106,5 +129,25 @@ const ItemModal = (props) => {
         </Modal>
     );
 }
+
+ItemModal.propTypes = {
+    entityInfo: entityInfoPropType,
+    entities: entitiesPropType,
+    item: PropTypes.object.isRequired,
+    handleToggle: PropTypes.func,
+    handlePayload: PropTypes.func,
+    removeAction: PropTypes.func,
+    displayComponent: PropTypes.element,
+    readOnly: PropTypes.bool,
+    updateView: PropTypes.bool,
+    actionDisabled: PropTypes.bool
+};
+
+ItemModal.defaultProps = {
+    item: {},
+    readOnly: false,
+    updateView: false,
+    actionDisabled: false
+};
 
 export default Item;

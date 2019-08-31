@@ -5,6 +5,7 @@ import { Item, Input, Filter, Action } from '../../components';
 import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 import './List.css';
 
+
 const List = (props) => {
     const [ createView, setCreateView ] = useState(false);
     const [ payload, setPayload ] = useState({});
@@ -104,13 +105,6 @@ List.propTypes = {
     createAction: PropTypes.func
 };
 
-List.defaultProps = {
-    entityInfo: {},
-    entities: {
-        list: [],
-        requesting: true
-    }
-};
 
 const ListModal = (props) => {
     const { entityInfo, createView, disabled,
@@ -151,7 +145,6 @@ ListModal.propTypes = {
 };
 
 ListModal.defaultProps = {
-    entityInfo: {},
     createView: false,
     disabled: false
 };
