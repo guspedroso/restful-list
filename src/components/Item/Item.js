@@ -2,17 +2,16 @@ import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import { Input, Action } from '../../components';
-import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
+import { entityInfoPropType } from '../../common/propTypes';
 import './Item.css';
 
 const Item = (props) => {
     const [ updateView, setUpdateView ] = useState(false);
     const [ payload, setPayload ] = useState({});
 
-    const { entities, item, entityInfo, valueAction, updateAction, removeAction,
-            displayComponent, readOnly, useModal, hide, disabled } = props;
+    const { item, entityInfo, valueAction, updateAction, removeAction,
+            displayComponent, readOnly, useModal, hide, disabled, updated, removed } = props;
     const { updating, removing, id } = item;
-    const { updated, removed } = entities;
     const actionDisabled = !id || disabled || updating || removing || readOnly;
 
     useEffect(() => {
@@ -76,7 +75,6 @@ const Item = (props) => {
 
 Item.propTypes = {
     entityInfo: entityInfoPropType,
-    entities: entitiesPropType,
     item: PropTypes.object.isRequired,
     valueAction: PropTypes.func,
     updateAction: PropTypes.func,
@@ -85,15 +83,18 @@ Item.propTypes = {
     readOnly: PropTypes.bool,
     useModal: PropTypes.bool,
     hide: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    updated: PropTypes.bool,
+    removed: PropTypes.bool
 };
 
 Item.defaultProps = {
-    item: {},
     readOnly: false,
     useModal: true,
     hide: false,
-    disabled: false
+    disabled: false,
+    updated: false,
+    removed: false
 };
 
 const ItemModal = (props) => {
@@ -132,7 +133,6 @@ const ItemModal = (props) => {
 
 ItemModal.propTypes = {
     entityInfo: entityInfoPropType,
-    entities: entitiesPropType,
     item: PropTypes.object.isRequired,
     handleToggle: PropTypes.func,
     handlePayload: PropTypes.func,
@@ -144,7 +144,6 @@ ItemModal.propTypes = {
 };
 
 ItemModal.defaultProps = {
-    item: {},
     readOnly: false,
     updateView: false,
     actionDisabled: false

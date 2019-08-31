@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actions } from './actions';
 import { Item } from '../../components';
 import { EntityWrapper, EntityDisplay } from '../Entity';
 import { entityInfo } from './constants';
+import { entityInfoPropType } from '../../common/propTypes';
 
-class Entity extends Component {
+class EntityItem extends Component {
     componentDidMount() {
         const { getByIdAction, id } = this.props;
 
-        if (id) {
+        if (id && !!getByIdAction) {
             getByIdAction(id);
         }
     }
 
     render() {
-        const { item, updateAction, removeAction } = this.props;
-
         return (
             <EntityWrapper>
                 <Item
-                    entityInfo={entityInfo}
-                    item={item}
-                    updateAction={updateAction}
-                    removeAction={removeAction}
+                    {...this.props}
                     displayComponent={
                         <EntityDisplay />
                     }
@@ -33,12 +30,26 @@ class Entity extends Component {
     }
 }
 
+EntityItem.propTypes = {
+    entityInfo: entityInfoPropType,
+    item: PropTypes.object.isRequired,
+    id: PropTypes.string,
+    getByIdAction: PropTypes.func,
+    updateAction: PropTypes.func,
+    removeAction: PropTypes.func,
+};
+
+EntityItem.defaultProps = {
+    item: {}
+};
+
 const mapStateToProps = (state, ownProps) => {
     const { entities } = state;
     const { item } = entities;
 
     return {
-        item
+        item,
+        entityInfo
     }
 };
 
@@ -50,4 +61,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Entity);
+export default connect(mapStateToProps, mapDispatchToProps)(EntityItem);

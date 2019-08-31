@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actions } from './actions';
 import { List } from '../../components';
 import { EntityWrapper, EntityDisplay } from '../Entity';
 import { entityInfo } from './constants';
+import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 
-class Entity extends Component {
+class EntityList extends Component {
     componentDidMount() {
         const { getAllAction } = this.props;
 
@@ -13,12 +15,10 @@ class Entity extends Component {
     }
 
     render() {
-
         return (
             <EntityWrapper>
                 <List
                     {...this.props}
-                    entityInfo={entityInfo}
                     displayComponent={
                         <EntityDisplay 
                             listView={true}
@@ -30,17 +30,31 @@ class Entity extends Component {
     }
 }
 
+EntityList.propTypes = {
+    entityInfo: entityInfoPropType,
+    entities: entitiesPropType,
+    getAllAction: PropTypes.func,
+    createAction: PropTypes.func,
+    updateAction: PropTypes.func,
+    removeAction: PropTypes.func,
+    valueAction: PropTypes.func
+};
+
 const mapStateToProps = (state, ownProps) => {
     let { entities, filter } = state;
     let { filterValue } = filter;
     let { list } = entities;
 
+    // filter if needed
+    list = !!list ? list.filter(item => !!item.name && item.name.toLowerCase().includes(!!filterValue ? filterValue : '')) : [];
+
     entities = {
         ...entities,
-        list: !!list ? list.filter(item => !!item.name && item.name.toLowerCase().includes(!!filterValue ? filterValue : '')) : []
+        list: list
     }
 
     return {
+        entityInfo,
         entities
     }
 };
@@ -55,4 +69,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Entity);
+export default connect(mapStateToProps, mapDispatchToProps)(EntityList);

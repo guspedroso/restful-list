@@ -11,7 +11,7 @@ const List = (props) => {
     const [ payload, setPayload ] = useState({});
 
     const { entityInfo, entities, valueAction, createAction } = props;
-    const { list, requesting, created, creating, updating, removing, error } = entities;
+    const { list, requesting, created, creating, updating, removing, error, updated, removed } = entities;
     const { listTitle } = entityInfo;
     const disabled = creating || updating || removing;
 
@@ -76,6 +76,8 @@ const List = (props) => {
                                 {...props}
                                 item={item}
                                 disabled={disabled}
+                                updated={updated}
+                                removed={removed}
                             />
                         </Col>
                     </Row>
