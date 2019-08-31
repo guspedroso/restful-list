@@ -1,14 +1,16 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import { Item, Input, Filter, Action } from '../../components';
+import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 import './List.css';
 
 const List = (props) => {
     const [ createView, setCreateView ] = useState(false);
     const [ payload, setPayload ] = useState({});
 
-    const { entityInfo = {}, entities = {}, valueAction, createAction } = props;
-    const { list = [], requesting = false, created = false, creating = false, updating = false, removing = false, error } = entities;
+    const { entityInfo, entities, valueAction, createAction } = props;
+    const { list, requesting, created, creating, updating, removing, error } = entities;
     const { listTitle } = entityInfo;
     const disabled = creating || updating || removing;
 
@@ -28,7 +30,7 @@ const List = (props) => {
     }, [created, createView, valueAction]);
 
     const handleCreate = () => createAction(payload);
-    const handlePayload = event => setPayload({...payload, [event.target.name]: event.target.value});
+    const handlePayload = e => setPayload({...payload, [e.target.name]: e.target.value});
     const handleToggle = () => setCreateView(!createView);
 
     return (
@@ -42,11 +44,12 @@ const List = (props) => {
                 handlePayload={handlePayload} 
             />
             <Container>
+                { !!listTitle &&
                 <Row>
                     <Col className='list-row top'>
                         <h2>{listTitle}</h2>
                     </Col>
-                </Row>
+                </Row> }
                 <Row>
                     <Col className='list-row top'>
                         <Filter/>
@@ -94,8 +97,23 @@ const List = (props) => {
     );
 }
 
+List.propTypes = {
+    entityInfo: entityInfoPropType,
+    entities: entitiesPropType,
+    valueAction: PropTypes.func,
+    createAction: PropTypes.func
+};
+
+List.defaultProps = {
+    entityInfo: {},
+    entities: {
+        list: [],
+        requesting: true
+    }
+};
+
 const ListModal = (props) => {
-    const { entityInfo = {}, createView = false, disabled = false,
+    const { entityInfo, createView, disabled,
             handleCreate, handleToggle, handlePayload } = props;
     const { title } = entityInfo;
 
@@ -122,5 +140,20 @@ const ListModal = (props) => {
         </Modal>
     );
 }
+
+ListModal.propTypes = {
+    entityInfo: entityInfoPropType,
+    createView: PropTypes.bool,
+    disabled: PropTypes.bool,
+    handleCreate: PropTypes.func,
+    handleToggle: PropTypes.func,
+    handlePayload: PropTypes.func
+};
+
+ListModal.defaultProps = {
+    entityInfo: {},
+    createView: false,
+    disabled: false
+};
 
 export default List;
