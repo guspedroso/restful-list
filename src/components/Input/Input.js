@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
+import { entityInfoPropType } from '../../common/propTypes';
 
 const Input = (props) => {
-    const { item = {}, entityInfo = {},
-            readOnly = false, displayComponent } = props;
+    const { item, entityInfo, readOnly, displayComponent } = props;
 
     return (
         readOnly ?
@@ -17,25 +18,48 @@ const Input = (props) => {
     );
 }
 
+Input.propTypes = {
+    entityInfo: entityInfoPropType,
+    item: PropTypes.object.isRequired,
+    readOnly: PropTypes.bool.isRequired,
+    displayComponent: PropTypes.element
+};
+
+Input.defaultProps = {
+    readOnly: false
+};
+
+
 const DefaultDisplayInput = (props) => {
-    const { entityInfo = {}, item = {} } = props;
-    const { inputTypes = [] } = entityInfo;
+    const { entityInfo, item, displayKey } = props;
+    const { inputTypes } = entityInfo;
 
     return (
         inputTypes
         .filter(inputType => inputType.canShow === true)
         .map((inputType, index) =>
-        <span className="padding-right" key={inputType.name}>
-            {item[inputType.name]}
+        <span className="padding-right" key={inputType[displayKey]}>
+            {item[inputType[displayKey]]}
         </span>)
     );
 }
 
+DefaultDisplayInput.propTypes = {
+    entityInfo: entityInfoPropType,
+    item: PropTypes.object.isRequired,
+    displayComponent: PropTypes.element,
+    displayKey: PropTypes.string.isRequired
+};
+
+DefaultDisplayInput.defaultProps = {
+    displayKey: 'name'
+};
+
+
 const EditInputTypes = (props) => {
-    const { entityInfo = {}, item = {}, 
-            hideLabels = false, handlePayload } = props;
-    const { inputTypes = [] } = entityInfo;
-    const { updating = false, removing = false } = item;
+    const { entityInfo, item, hideLabels, handlePayload } = props;
+    const { inputTypes } = entityInfo;
+    const { updating, removing } = item;
     const disabled = updating || removing;
 
     return (
@@ -57,9 +81,20 @@ const EditInputTypes = (props) => {
     );
 }
 
+EditInputTypes.propTypes = {
+    entityInfo: entityInfoPropType,
+    item: PropTypes.object.isRequired,
+    hideLabels: PropTypes.bool.isRequired,
+    handlePayload: PropTypes.func.isRequired
+};
+
+EditInputTypes.defaultProps = {
+    hideLabels: false
+};
+
+
 const TextInput = (props) => {
-    const { inputType = {}, item = {}, hideLabel = false,
-            handlePayload, disabled = false } = props;
+    const { inputType, item, hideLabel, handlePayload, disabled } = props;
 
     return (
         <Form.Group>
@@ -76,5 +111,19 @@ const TextInput = (props) => {
         </Form.Group>
     );
 }
+
+TextInput.propTypes = {
+    inputType: PropTypes.object.isRequired,
+    item: PropTypes.object.isRequired,
+    hideLabel: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    handlePayload: PropTypes.func.isRequired
+};
+
+TextInput.defaultProps = {
+    hideLabel: false,
+    disabled: false
+};
+
 
 export default Input;

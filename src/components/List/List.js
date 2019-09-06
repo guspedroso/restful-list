@@ -120,6 +120,7 @@ const ListModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <Input
+                    item={{}}
                     entityInfo={entityInfo}
                     handlePayload={handlePayload}
                 />

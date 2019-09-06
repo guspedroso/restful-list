@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import './Action.css';
 
 const Action = (props) => {
     const [removeView, setRemoveView] = useState(false);
 
-    const { hide = false, open = false, disabled = false,
-            toggleOnly = false, actionType = 'Edit', outerClass = '',
+    const { hide, open, disabled, toggleOnly, actionType, outerClass,
             handleCreate, handleUpdate, handleRemove, handleToggle } = props;
 
     const handleRemoveView = () => setRemoveView(!removeView);
@@ -58,5 +58,27 @@ const Action = (props) => {
         </div>
     );
 }
+
+Action.propTypes = {
+    hide: PropTypes.bool.isRequired,
+    open: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    toggleOnly: PropTypes.bool.isRequired,
+    actionType: PropTypes.string.isRequired,
+    outerClass: PropTypes.string.isRequired,
+    handleCreate: PropTypes.func,
+    handleUpdate: PropTypes.func,
+    handleRemove: PropTypes.func,
+    handleToggle: PropTypes.func
+};
+
+Action.defaultProps = {
+    hide: false,
+    open: false,
+    disabled: false,
+    toggleOnly: false,
+    actionType: 'Edit',
+    outerClass: ''
+};
 
 export default Action;
