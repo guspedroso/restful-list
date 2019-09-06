@@ -1,23 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { EntityItem, EntityList, EntityDisplay, EntityWrapper } from '../Entity';
-import { ProviderWrapper } from '../../getProvider';
+import { EntityItem } from './EntityItem';
+import { EntityList } from './EntityList';
+import { EntityDisplay, EntityWrapper } from '../Entity';
+import { entityInfo } from '../../resources/Entity/constants';
 
 it('Entity Item renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-        <ProviderWrapper>
-            <EntityItem />
-        </ProviderWrapper>, div);
+        <EntityItem
+          item={{}}
+          entityInfo={entityInfo} 
+        />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('Entity List renders without crashing', () => {
   const div = document.createElement('div');
+  const entities = {
+    list: [],
+    requesting: true,
+  };
+    
   ReactDOM.render(
-        <ProviderWrapper>
-            <EntityList />
-        </ProviderWrapper>, div);
+        <EntityList
+          entities={entities}
+          entityInfo={entityInfo}
+        />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 

@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import rootReducer from './reducer';
-import { config } from './common/config';
+import { config } from '../../common/config';
 
 let middleware = [thunk];
 

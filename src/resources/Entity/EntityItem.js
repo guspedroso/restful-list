@@ -7,7 +7,7 @@ import { EntityWrapper, EntityDisplay } from '../Entity';
 import { entityInfo } from './constants';
 import { entityInfoPropType } from '../../common/propTypes';
 
-class EntityItem extends Component {
+export class EntityItem extends Component {
     componentDidMount() {
         const { getByIdAction, id } = this.props;
 

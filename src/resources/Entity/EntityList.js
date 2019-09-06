@@ -7,11 +7,13 @@ import { EntityWrapper, EntityDisplay } from '../Entity';
 import { entityInfo } from './constants';
 import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 
-class EntityList extends Component {
+export class EntityList extends Component {
     componentDidMount() {
         const { getAllAction } = this.props;
 
-        getAllAction();
+        if (getAllAction) {
+            getAllAction();
+        } 
     }
 
     render() {
