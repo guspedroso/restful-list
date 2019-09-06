@@ -1,18 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Snapshot works 1`] = `
-Array [
-  <div
-    className="form-group"
-  >
-    <input
-      className="form-control"
-      name=""
-      onChange={[Function]}
-      placeholder="Filter..."
-      type="text"
-    />
-  </div>,
-  ">",
-]
+<div
+  className="form-group"
+>
+  <input
+    className="form-control"
+    name=""
+    onChange={[Function]}
+    placeholder="Filter..."
+    type="text"
+  />
+</div>
 `;

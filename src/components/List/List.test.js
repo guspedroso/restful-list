@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import List from './List';
-import { ProviderWrapper } from '../../getProvider';
 import { entityInfo } from '../../resources/Entity/constants';
 
 it('renders without crashing', () => {
@@ -12,11 +11,9 @@ it('renders without crashing', () => {
     };
 
     ReactDOM.render(
-        <ProviderWrapper>
-            <List
-                entityInfo={entityInfo}
-                entities={entities}
-            />
-        </ProviderWrapper>, div);
+        <List
+            entityInfo={entityInfo}
+            entities={entities}
+        />, div);
     ReactDOM.unmountComponentAtNode(div);
 });

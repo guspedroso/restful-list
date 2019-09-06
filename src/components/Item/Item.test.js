@@ -1,22 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Item from './Item';
-import { ProviderWrapper } from '../../getProvider';
 import { entityInfo } from '../../resources/Entity/constants';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
 
-    const item = {
-
-    };
+    const item = {};
 
     ReactDOM.render(
-        <ProviderWrapper>
-            <Item
-                item={item}
-                entityInfo={entityInfo}
-            />
-        </ProviderWrapper>, div);
+        <Item
+            item={item}
+            entityInfo={entityInfo}
+        />, div);
     ReactDOM.unmountComponentAtNode(div);
 });

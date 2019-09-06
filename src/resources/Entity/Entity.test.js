@@ -24,17 +24,13 @@ it('Entity List renders without crashing', () => {
 it('Entity Display renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-        <ProviderWrapper>
-            <EntityDisplay />
-        </ProviderWrapper>, div);
+        <EntityDisplay />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('Entity Wrapper renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-        <ProviderWrapper>
-            <EntityWrapper />
-        </ProviderWrapper>, div);
+        <EntityWrapper />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
