@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
+import InputText from './InputText';
 import { entityInfoPropType } from '../../common/propTypes';
 
 const Input = (props) => {
@@ -68,7 +69,7 @@ const EditInputTypes = (props) => {
         .map((inputType, index) =>
             <Fragment key={`${inputType.type}-${index}`}>
                 { inputType.type === 'text' ?
-                <TextInput
+                <InputText
                     handlePayload={handlePayload}
                     item={item}
                     inputType={inputType}
@@ -91,39 +92,5 @@ EditInputTypes.propTypes = {
 EditInputTypes.defaultProps = {
     hideLabels: false
 };
-
-
-const TextInput = (props) => {
-    const { inputType, item, hideLabel, handlePayload, disabled } = props;
-
-    return (
-        <Form.Group>
-            { !hideLabel &&
-            <Form.Label>{inputType.label}</Form.Label> }
-            <Form.Control 
-                type={inputType.type}
-                placeholder={inputType.placeholder}
-                name={inputType.name}
-                onChange={handlePayload}
-                defaultValue={item[inputType.name]}
-                disabled={disabled}
-            />
-        </Form.Group>
-    );
-}
-
-TextInput.propTypes = {
-    inputType: PropTypes.object.isRequired,
-    item: PropTypes.object.isRequired,
-    hideLabel: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    handlePayload: PropTypes.func.isRequired
-};
-
-TextInput.defaultProps = {
-    hideLabel: false,
-    disabled: false
-};
-
 
 export default Input;

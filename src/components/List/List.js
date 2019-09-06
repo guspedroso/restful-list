@@ -2,16 +2,16 @@ import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import { Item, Input, Filter, Action } from '../../components';
+import ListModal from './ListModal';
 import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 import './List.css';
-
 
 const List = (props) => {
     const [ createView, setCreateView ] = useState(false);
     const [ payload, setPayload ] = useState({});
     const [ filterValue, setfilterValue ] = useState('');
 
-    const { entityInfo, entities, valueAction, createAction } = props;
+    const { entityInfo, entities, valueAction, createAction, allowCreate } = props;
     const { list, requesting, created, creating, updating, removing, error, updated, removed } = entities;
     const { listTitle, filterType } = entityInfo;
     const disabled = creating || updating || removing;
@@ -85,6 +85,7 @@ const List = (props) => {
                         </Col>
                     </Row>
                 )}
+                { !!allowCreate &&
                 <Row>
                     <Col>
                         <Action
@@ -97,7 +98,7 @@ const List = (props) => {
                             toggleOnly={true}
                         />
                     </Col>
-                </Row>
+                </Row> }
             </Container>
         </Fragment>
     );
@@ -107,52 +108,12 @@ List.propTypes = {
     entityInfo: entityInfoPropType,
     entities: entitiesPropType,
     valueAction: PropTypes.func,
-    createAction: PropTypes.func
+    createAction: PropTypes.func,
+    allowCreate: PropTypes.bool
 };
 
-
-const ListModal = (props) => {
-    const { entityInfo, createView, disabled,
-            handleCreate, handleToggle, handlePayload } = props;
-    const { title } = entityInfo;
-
-    return (
-        <Modal show={createView} onHide={handleToggle}>
-            <Modal.Header closeButton>
-                <Modal.Title>Create {title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Input
-                    item={{}}
-                    entityInfo={entityInfo}
-                    handlePayload={handlePayload}
-                />
-            </Modal.Body>
-            <Modal.Footer>
-                <Action
-                    disabled={disabled}
-                    handleCreate={handleCreate}
-                    handleToggle={handleToggle}
-                    open={createView}
-                    outerClass='max-width'
-                />
-            </Modal.Footer>
-        </Modal>
-    );
+List.defaultProps = {
+    allowCreate: true
 }
-
-ListModal.propTypes = {
-    entityInfo: entityInfoPropType,
-    createView: PropTypes.bool,
-    disabled: PropTypes.bool,
-    handleCreate: PropTypes.func,
-    handleToggle: PropTypes.func,
-    handlePayload: PropTypes.func
-};
-
-ListModal.defaultProps = {
-    createView: false,
-    disabled: false
-};
 
 export default List;
