@@ -2,6 +2,7 @@ export const entityInfo = {
     apiType: 'entity',
     title: 'Entity',
     listTitle: 'Entities',
+    filterType: 'name',
     inputTypes: [
         {
             label: 'Name',
@@ -12,6 +13,15 @@ export const entityInfo = {
             canShow: true, // if this is an attribute that you don't want to show anymore, set to false
             canEdit: true // if you want to only show this value and not allow edit.. set to false
         },
+        /*{
+            label: 'Description',
+            type: 'text', 
+            placeholder: 'Enter description',
+            name: 'description',
+            required: true, 
+            canShow: true,
+            canEdit: true
+        },*/
     ]
 };
 

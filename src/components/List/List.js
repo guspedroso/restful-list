@@ -9,10 +9,11 @@ import './List.css';
 const List = (props) => {
     const [ createView, setCreateView ] = useState(false);
     const [ payload, setPayload ] = useState({});
+    const [ filterValue, setfilterValue ] = useState('');
 
     const { entityInfo, entities, valueAction, createAction } = props;
     const { list, requesting, created, creating, updating, removing, error, updated, removed } = entities;
-    const { listTitle } = entityInfo;
+    const { listTitle, filterType } = entityInfo;
     const disabled = creating || updating || removing;
 
     useEffect(() => {
@@ -51,11 +52,12 @@ const List = (props) => {
                         <h2>{listTitle}</h2>
                     </Col>
                 </Row> }
+                { !!filterType &&
                 <Row>
                     <Col className='list-row top'>
-                        <Filter/>
+                        <Filter setAction={setfilterValue} />
                     </Col>
-                </Row>
+                </Row> }
                 { !!error &&
                 <Row>
                     <Col className={`list-row error`}>
@@ -69,6 +71,7 @@ const List = (props) => {
                     </Col>
                 </Row> :
                 !!list && list
+                .filter(item => !filterType || (!!item[filterType] && item[filterType].toLowerCase().includes(filterValue)))
                 .map(item =>
                     <Row key={item.id}>
                         <Col className="list-row">

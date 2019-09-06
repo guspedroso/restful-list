@@ -21,12 +21,13 @@ export const entityInfoPropType = PropTypes.shape({
     apiType: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     listTitle: PropTypes.string.isRequired,
-    inputTypes: inputTypesPropType
+    inputTypes: inputTypesPropType,
+    filterType: PropTypes.string
 }).isRequired;
 
 // ever list of entities will be shaped like this
 export const entitiesPropType = PropTypes.shape({
-    list: PropTypes.array.isRequired,
+    list: PropTypes.array,
     requesting: PropTypes.bool,
     created: PropTypes.bool,
     creating: PropTypes.bool,

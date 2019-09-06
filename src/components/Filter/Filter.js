@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
-import { actions } from './actions';
 
 const Filter = (props) => {
     const { filterValue, placeholder, setAction } = props;
@@ -32,19 +30,4 @@ Filter.defaultProps = {
     placeholder: 'Filter...'
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { filter } = state;
-    const { filterValue } = filter;
-
-    return {
-        filterValue
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        setAction: (filterValue) => dispatch(actions.set(filterValue))
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

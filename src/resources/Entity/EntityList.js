@@ -41,17 +41,7 @@ EntityList.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    let { entities, filter } = state;
-    let { filterValue } = filter;
-    let { list } = entities;
-
-    // filter if needed
-    list = !!list ? list.filter(item => !!item.name && item.name.toLowerCase().includes(!!filterValue ? filterValue : '')) : [];
-
-    entities = {
-        ...entities,
-        list: list
-    }
+    const { entities } = state;
 
     return {
         entityInfo,
