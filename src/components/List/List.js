@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Modal } from 'react-bootstrap';
-import { Item, Input, Filter, Action } from '../../components';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Item, Filter, Action } from '../../components';
 import ListModal from './ListModal';
 import { entityInfoPropType, entitiesPropType } from '../../common/propTypes';
 import './List.css';

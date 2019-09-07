@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'react-bootstrap';
 import { Input, Action } from '../../components';
 import ItemModal from './ItemModal';
 import { entityInfoPropType } from '../../common/propTypes';

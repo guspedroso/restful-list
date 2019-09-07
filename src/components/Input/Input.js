@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-bootstrap';
 import InputText from './InputText';
 import { entityInfoPropType } from '../../common/propTypes';
 
